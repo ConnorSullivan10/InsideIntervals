@@ -1,6 +1,6 @@
 using System;
 
-namespace InsideIntervals.mvc
+namespace InsideIntervals.api
 {
     public class WeatherForecast
     {

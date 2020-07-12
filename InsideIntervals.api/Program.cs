@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace InsideIntervals.mvc
+namespace InsideIntervals.api
 {
     public class Program
     {

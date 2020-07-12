@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace InsideIntervals.mvc
+namespace InsideIntervals.api
 {
     public class Startup
     {
