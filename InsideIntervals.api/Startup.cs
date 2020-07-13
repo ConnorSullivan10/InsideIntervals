@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using InsideIntervals.api.DataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace InsideIntervals.api
 {
@@ -26,6 +28,33 @@ namespace InsideIntervals.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+                options.AddPolicy("ItsAllGood",
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
+            );
+
+            var authSettings = Configuration.GetSection("AuthenticationSettings");
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.IncludeErrorDetails = true;
+                    options.Authority = authSettings["Authority"];
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = authSettings["Issuer"],
+                        ValidateAudience = true,
+                        ValidAudience = authSettings["Audience"],
+                        ValidateLifetime = true
+                    };
+                }
+                );
+
+            services.AddTransient<UsersRepo>();
+            services.AddTransient<IntervalsRepo>();
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,9 +65,13 @@ namespace InsideIntervals.api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ItsAllGood");
 
             app.UseAuthorization();
 
