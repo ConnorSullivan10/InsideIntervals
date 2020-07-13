@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using InsideIntervals.api.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace InsideIntervals.api
 {
@@ -31,7 +32,7 @@ namespace InsideIntervals.api
 
             services.AddCors(options =>
                 options.AddPolicy("ItsAllGood",
-                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
             );
 
             var authSettings = Configuration.GetSection("AuthenticationSettings");

@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using InsideIntervals.api.DataAccess;
+using InsideIntervals.api.Models;
 
-namespace InsideIntervals.api.Controllers
+namespace InsideIntervals.Controllers
 {
-    public class HomeController : Controller
+    [Route("api/intervals")]
+    [ApiController]
+
+    public class IntervalsController : ControllerBase
     {
-        public IActionResult Index()
+        IntervalsRepo _repository;
+
+        public IntervalsController(IntervalsRepo repository)
         {
-            return View();
+            _repository = repository;
         }
     }
 }
