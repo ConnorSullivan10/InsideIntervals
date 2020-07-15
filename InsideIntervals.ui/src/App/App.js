@@ -2,53 +2,62 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
+  // Redirect,
   Switch,
 } from 'react-router-dom';
-// import firebase from 'firebase';
+import firebase from 'firebase';
 import Navbar from '../components/shared/Navbar/Navbar';
 import Home from '../components/pages/Home/Home';
 import Intervals from '../components/pages/Intervals/Intervals';
 import UserProfile from '../components/pages/UserProfile/UserProfile';
-import Login from '../components/shared/Login/Login';
+// import Login from '../components/shared/Login/Login';
 
 import './App.scss';
 import fbConnection from '../helpers/data/connection';
-// import userData from '../helpers/data/userData';
+import auth from '../helpers/data/auth';
 
 fbConnection();
 
-const PrivateRoute = ({ component: Component, authed, ...rest }) => {
-  const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />);
-  return <Route {...rest} render={(props) => routeChecker(props)} />;
-};
+// const PrivateRoute = ({ component: Component, authed, ...rest }) => {
+//   const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
+//   return <Route {...rest} render={(props) => routeChecker(props)} />;
+// };
 
 class App extends React.Component {
   state = {
     authed: false,
-    registeredUser: {},
-    firebaseUser: {},
+    userEmail: '',
+    firebaseUid: '',
+  }
+
+  componentDidMount() {
+    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authed: true,
+          userEmail: auth.getEmail(),
+          firebaseUid: auth.getUid(),
+        });
+      } else {
+        this.setState({ authed: false });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeListener();
   }
 
   render() {
-    const { authed, registeredUser } = this.state;
+    const { authed, userEmail, firebaseUid } = this.state;
     return (
     <div className="App">
       <Router>
-        <Navbar authed={authed} registeredUserId={registeredUser?.id} />
+        <Navbar authed={authed}/>
         <Switch>
-          <Route path="/" exact component={Home} authed={authed} />
-          <Route
-            path='/login'
-            render={() => (authed ? (
-                <Redirect to='/home' />
-            ) : (
-                <Login />
-            ))
-            }
-          />
-          <Route path="/Intervals" exact component={Intervals} authed={authed} />
-          <PrivateRoute path="/userProfile" exact component={UserProfile} authed={authed} userObj={registeredUser}/>
+          <Route path="/" exact render={(props) => <Home {...props} authed={authed}/>}/>
+          <Route path="/Intervals" exact render={(props) => <Intervals {...props} authed={authed}/>}/>
+          <Route path="/userProfile" exact render={(props) => <UserProfile {...props} authed={authed} userEmail={userEmail} firebaseUid={firebaseUid} />}/>
         </Switch>
       </Router>
     </div>

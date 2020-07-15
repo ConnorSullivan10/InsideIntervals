@@ -1,26 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import firebase from 'firebase';
 import logo from '../../../images/insideIntervalsLogo.PNG';
 import './Navbar.scss';
-// import Login from '../../shared/Login/Login';
-// import fbConnection from '../../../helpers/data/connection';
-
-// fbConnection();
+// import authButton from '../../../images/authButton.PNG';
 
 class Navbar extends React.Component {
   static propTypes = {
-    userAuthed: PropTypes.bool,
+    authed: PropTypes.bool,
   }
 
   logUserOut = (e) => {
     e.preventDefault();
-    // TBD
+    sessionStorage.removeItem('token');
+    firebase.auth().signOut();
   }
 
+  loginClickEvent = (e) => {
+    e.preventDefault();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+      .then((cred) => {
+      // get token from firebase
+        cred.user.getIdToken()
+        // save the token to the session storage
+          .then((token) => sessionStorage.setItem('token', token));
+      });
+  }
+
+  getUid = () => firebase.auth().currentUser.uid;
+
   render() {
-    const { userAuthed } = this.props;
+    const { authed } = this.props;
     const buildAuthedNav = () => {
-      if (userAuthed) {
+      if (authed) {
         return (
 
           <div className="collapse navbar-collapse order-2" id="navbarText2">
@@ -28,8 +41,8 @@ class Navbar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="/userProfile">Profile</a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="TBD">Logout</a>
+            <li className="nav-item logOut">
+              <button className="nav-link btn btn-outline-danger logoutBtn" onClick={this.logUserOut}>Logout</button>
             </li>
           </ul>
         </div>
@@ -39,7 +52,9 @@ class Navbar extends React.Component {
         <div className="collapse navbar-collapse order-2" id="navbarText2">
           <ul className="navbar-nav ml-auto nav2">
             <li className="nav-item">
-              <a className="nav-link" href="/login">Login</a>
+              <div className="Auth">
+                <button className="btn btn-primary loginBtn" onClick={this.loginClickEvent}>Login with Google</button>
+              </div>
             </li>
           </ul>
         </div>
