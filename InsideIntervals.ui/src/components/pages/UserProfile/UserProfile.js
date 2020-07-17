@@ -1,4 +1,5 @@
 import React from 'react';
+import './UserProfile.scss';
 // import uploadFile from '../../../helpers/data/tabUpload';
 
 class UserProfile extends React.Component {
