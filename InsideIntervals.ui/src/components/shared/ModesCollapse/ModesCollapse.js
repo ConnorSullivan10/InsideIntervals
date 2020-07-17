@@ -19,7 +19,6 @@ class ModesCollapse extends React.Component {
                 </button>
               </h5>
             </div>
-
             <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div className="card-body">
               <p>

@@ -6,7 +6,7 @@ class RelatedMode extends React.Component {
     // const { userEmail, firebaseUid } = this.props;
     return (
       <div className="RelatedMode">
-        <h1 className="text-center">Related Mode</h1>
+        <h1 className="text-center">Related Modes</h1>
       </div>
     );
   }
