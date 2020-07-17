@@ -5,10 +5,10 @@ import './SingleInterval.scss';
 
 class SingleInterval extends React.Component {
   render() {
-    // const { userEmail, firebaseUid } = this.props;
+    const { intervalName } = this.props;
     return (
       <div className="SingleInterval">
-        <h1 className="text-center">Selected Interval</h1>
+        <h1 className="text-center">{intervalName}</h1>
       </div>
     );
   }

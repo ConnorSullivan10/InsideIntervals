@@ -1,26 +1,45 @@
 import React from 'react';
+import SingleInterval from '../SingleInterval/SingleInterval';
 import './SelectAnInterval.scss';
 
 class SelectAnInterval extends React.Component {
   state = {
     selectedOption: '',
+    viewResults: false,
   }
 
   handleOptionChange = (changeEvent) => {
     this.setState({
       selectedOption: changeEvent.target.value,
+      viewResults: true,
     });
   }
 
-  handleIntervalSubmit = (formSubmitEvent) => {
-    formSubmitEvent.preventDefault();
-    console.log(this.state.selectedOption);
-  };
+  // handleIntervalSubmit = (formSubmitEvent) => {
+  //   formSubmitEvent.preventDefault();
+  //   console.log(this.state.selectedOption);
+  //   this.setState({
+  //     viewResults: true,
+  //   });
+  // };
 
   render() {
-    // const { userEmail, firebaseUid } = this.props;
+    const { selectedOption, viewResults } = this.state;
+    const renderIntervalDetails = () => {
+      if (viewResults === true) {
+        return (
+          <div className="results">
+            <SingleInterval intervalName={selectedOption}/>
+          </div>
+        );
+      }
+      return (
+        <div></div>
+      );
+    };
     return (
       <div className="SelectAnInterval">
+        <h4>Select an interval from the options below to learn more about it's sound.</h4>
         <form onSubmit={this.handleIntervalSubmit}>
           <div className="form-check">
             <label>
@@ -29,7 +48,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="root"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'root'}
+                checked= {selectedOption === 'root'}
                 onChange={this.handleOptionChange}
               />
               Root
@@ -42,7 +61,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="min2"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'min2'}
+                checked= {selectedOption === 'min2'}
                 onChange={this.handleOptionChange}
               />
               Minor 2nd
@@ -55,7 +74,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="maj2"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'maj2'}
+                checked= {selectedOption === 'maj2'}
                 onChange={this.handleOptionChange}
               />
               Major 2nd
@@ -68,7 +87,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="min3"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'min3'}
+                checked= {selectedOption === 'min3'}
                 onChange={this.handleOptionChange}
               />
               Minor 3rd
@@ -81,7 +100,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="maj3"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'maj3'}
+                checked= {selectedOption === 'maj3'}
                 onChange={this.handleOptionChange}
               />
               Major 3rd
@@ -94,7 +113,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="perf4"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'perf4'}
+                checked= {selectedOption === 'perf4'}
                 onChange={this.handleOptionChange}
               />
               Perfect 4th
@@ -107,7 +126,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="perf5"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'perf5'}
+                checked= {selectedOption === 'perf5'}
                 onChange={this.handleOptionChange}
               />
               Perfect 5th
@@ -120,7 +139,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="min6"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'min6'}
+                checked= {selectedOption === 'min6'}
                 onChange={this.handleOptionChange}
               />
               Minor 6th
@@ -133,7 +152,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="maj6"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'maj6'}
+                checked= {selectedOption === 'maj6'}
                 onChange={this.handleOptionChange}
               />
               Major 6th
@@ -146,7 +165,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="min7"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'min7'}
+                checked= {selectedOption === 'min7'}
                 onChange={this.handleOptionChange}
               />
               Minor 7th
@@ -159,7 +178,7 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="maj7"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'maj7'}
+                checked= {selectedOption === 'maj7'}
                 onChange={this.handleOptionChange}
               />
               Major 7th
@@ -172,18 +191,19 @@ class SelectAnInterval extends React.Component {
                 name="react-tips"
                 value="perf8"
                 className="form-check-input"
-                checked= {this.state.selectedOption === 'perf8'}
+                checked= {selectedOption === 'perf8'}
                 onChange={this.handleOptionChange}
               />
               Perfect 8th/Octave
             </label>
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <button className="btn btn-primary mt-2 learnMore" type="submit">
               Learn More
             </button>
-          </div>
+          </div> */}
         </form>
+        { renderIntervalDetails() }
       </div>
     );
   }
