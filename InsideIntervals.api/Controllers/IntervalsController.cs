@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using InsideIntervals.api.DataAccess;
 using InsideIntervals.api.Models;
+using Microsoft.VisualBasic;
 
 namespace InsideIntervals.Controllers
 {
@@ -16,11 +17,66 @@ namespace InsideIntervals.Controllers
 
     public class IntervalsController : ControllerBase
     {
-        IntervalsRepo _repository;
+        IntervalsRepo _intervalsRepository;
 
         public IntervalsController(IntervalsRepo repository)
         {
-            _repository = repository;
+            _intervalsRepository = repository;
+        }
+
+        //api/intervals/{intervalId}
+        [HttpGet("{intervalId}")]
+        public IActionResult GetIntervalById(int intervalId)
+        {
+            var selectedInterval =
+              _intervalsRepository.GetSingleIntervalById(intervalId);
+            
+            if (selectedInterval == null) NotFound("Couldn't find an interval with that id");
+
+            var modes = _intervalsRepository.GetModesByIntervalId(intervalId);
+            var chords = _intervalsRepository.GetChordsByIntervalId(intervalId);
+            var shapes = _intervalsRepository.GetShapesByIntervalId(intervalId);
+
+            var result = new IntervalViewModel
+            {
+                IntervalId = selectedInterval.IntervalId,
+                IntervalName = selectedInterval.IntervalName,
+                Chords = chords,
+                Modes = modes,
+                Shapes = shapes
+            };
+
+            return Ok(result);
+        }
+
+        //api/intervals/chord/{chordId}
+        [HttpGet("chord/{chordId}")]
+        public IActionResult GetChordById(int chordId)
+        {
+            var selectedChord =
+              _intervalsRepository.GetSingleChordById(chordId);
+            if (selectedChord == null) return NotFound("Can't strike a chord with that id");
+            return Ok(selectedChord);
+        }
+
+        //api/intervals/mode/{modeId}
+        [HttpGet("mode/{modeId}")]
+        public IActionResult GetModeById(int modeId)
+        {
+            var selectedMode =
+              _intervalsRepository.GetSingleModeById(modeId);
+            if (selectedMode == null) return NotFound("Couldn't find a mode with that id");
+            return Ok(selectedMode);
+        }
+
+        //api/intervals/mode/{modeId}
+        [HttpGet("shape/{shapeId}")]
+        public IActionResult GetIntervalShapeById(int shapeId)
+        {
+            var selectedMode =
+              _intervalsRepository.GetSingleIntervalShapeById(shapeId);
+            if (selectedMode == null) return NotFound("Couldn't find an interval shape with that id");
+            return Ok(selectedMode);
         }
     }
 }

@@ -11,17 +11,17 @@ namespace InsideIntervals.api.Controllers
     [ApiController]
     public class TabController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult UploadFile()
-        {
-            var fileUploadHelper = new FileUploadHelper();
-            var file = fileUploadHelper.GeFileUploadContent(Request.ContentType, Request.Body);
-            return Ok();
-        }
+        //[HttpPost]
+        //public IActionResult UploadFile()
+        //{
+        //    var fileUploadHelper = new FileUploadHelper();
+        //    var file = fileUploadHelper.GeFileUploadContent(Request.ContentType, Request.Body);
+        //    return Ok();
+        //}
 
-        void SaveFile(UploadedFile file)
-        {
+        //void SaveFile(UploadedFile file)
+        //{
 
-        }
+        //}
     }
 }

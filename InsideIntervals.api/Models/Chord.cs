@@ -9,7 +9,8 @@ namespace InsideIntervals.api.Models
     {
         public int ChordId { get; set; }
         public string ChordName { get; set; }
+        public string ChordType { get; set; }
         public string ChordDescription { get; set; }
-        public byte[] ChordImg { get; set; }
+        public string ChordIntervals { get; set; }
     }
 }

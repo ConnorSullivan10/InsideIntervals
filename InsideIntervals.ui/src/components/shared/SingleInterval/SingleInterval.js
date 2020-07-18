@@ -5,10 +5,19 @@ import './SingleInterval.scss';
 
 class SingleInterval extends React.Component {
   render() {
-    const { intervalName } = this.props;
+    const {
+      intervalId,
+      intervalName,
+      chords,
+      modes,
+      shapes,
+    } = this.props;
     return (
       <div className="SingleInterval">
-        <h1 className="text-center">{intervalName}</h1>
+        <h2 className="text-center">{intervalId}</h2>
+        <h2 className="text-center">{intervalName}</h2>
+        <RelatedChord/>
+        <RelatedMode/>
       </div>
     );
   }
