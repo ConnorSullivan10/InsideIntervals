@@ -6,7 +6,7 @@ class ChordsCollapse extends React.Component {
   render() {
     // const { userEmail, firebaseUid } = this.props;
     return (
-      <div className="ChordssCollapse">
+      <div className="ChordsCollapse">
       <div className="accordion" id="accordionExample">
         <div className="card">
           <div className="card-header" id="headingTwo">

@@ -1,6 +1,7 @@
 import React from 'react';
 import RelatedMode from '../RelatedMode/RelatedMode';
 import RelatedChord from '../RelatedChord/RelatedChord';
+import IntervalShapes from '../IntervalShapes/IntervalShapes';
 import './SingleInterval.scss';
 
 class SingleInterval extends React.Component {
@@ -16,8 +17,9 @@ class SingleInterval extends React.Component {
       <div className="SingleInterval">
         <h2 className="text-center">{intervalId}</h2>
         <h2 className="text-center">{intervalName}</h2>
-        <RelatedChord/>
-        <RelatedMode/>
+        <IntervalShapes shapes={shapes}/>
+        <RelatedChord chords={chords}/>
+        <RelatedMode modes={modes}/>
       </div>
     );
   }
