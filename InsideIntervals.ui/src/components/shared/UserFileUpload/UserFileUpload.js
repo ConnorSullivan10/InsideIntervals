@@ -28,13 +28,7 @@ class UserFileUpload extends Component {
       e.preventDefault();
       const { title, journalEntry, file } = this.state;
       const { firebaseUid } = this.props;
-      // const newJournalEntry = {
-      //   firebaseUid,
-      //   entryName: title,
-      //   entryInput: journalEntry,
-      //   uploadedFileId: ,
-      // }
-      uploadFile.uploadFile(file);
+      uploadFile.uploadFile(file, title, journalEntry, firebaseUid);
     }
 
     render() {

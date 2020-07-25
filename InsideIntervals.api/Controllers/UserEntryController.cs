@@ -21,24 +21,20 @@ namespace InsideIntervals.api.Controllers
             _repo = repo;
         }
 
-        [HttpPost]
+        [HttpPost("fileUpload")]
         public IActionResult UploadFile()
         {
             var fileUploadHelper = new FileUploadHelper();
             var file = fileUploadHelper.GetFileUploadContent(Request.ContentType, Request.Body);
-            var fileAddedToDatabase = _repo.Add(file);
-            return Created("" , fileAddedToDatabase);
+            var fileIdAddedToDatabase = _repo.Add(file);
+            return Created("" , fileIdAddedToDatabase);
+        }
 
-            //var result = new UserEntry
-            //{
-            //    IntervalId = selectedInterval.IntervalId,
-            //    IntervalName = selectedInterval.IntervalName,
-            //    Chords = chords,
-            //    Modes = modes,
-            //    Shapes = shapes
-            //};
-
-            //return Ok(result);
+        [HttpPost("newEntry")]
+        public IActionResult NewUserEntry(UserEntry entryToAdd)
+        {
+            var newUserEntry = _repo.AddUserEntry(entryToAdd);
+            return Created("", newUserEntry);
         }
 
         //api/images/123

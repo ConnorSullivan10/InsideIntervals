@@ -9,7 +9,7 @@ namespace InsideIntervals.api.Models
     public class UserEntry
     {
         public int EntryId { get; set; }
-        public int FirebaseUid { get; set; }
+        public string FirebaseUid { get; set; }
         public string EntryName { get; set; }
         public string EntryInput { get; set; }
         public int UploadedFileId { get; set; }

@@ -32,15 +32,15 @@ namespace InsideIntervals.api.DataAccess
             }
         }
 
-        public UserEntry AddUserEntry(int fileId)
+        public UserEntry AddUserEntry(UserEntry entryToAdd)
         {
-            var sql = @"insert into UserProfileEntry(NumberInStock,Price,Size,Type)
+            var sql = @"insert into UserProfileEntry(FirebaseUid,EntryName,EntryInput,UploadedFileId)
                         output inserted.*
-                        values(@NumberInStock,@Price,@Size,@Type)";
+                        values(@FirebaseUid,@EntryName,@EntryInput,@UploadedFileId)";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var result = db.QueryFirstOrDefault<UserEntry>(sql, fileId);
+                var result = db.QueryFirstOrDefault<UserEntry>(sql, entryToAdd);
                 return result;
             }
         }
