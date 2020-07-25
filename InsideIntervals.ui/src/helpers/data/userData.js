@@ -1,17 +1,14 @@
-// import axios from 'axios';
-// import { baseUrl } from '../apiKeys.json';
+import axios from 'axios';
+import { baseUrl } from '../apiKeys.json';
 
-// const validateOrCreateUser = (user) =
+const getAllUserEntries = (firebaseUid) => new Promise((resolve, reject) => {
+  console.log(firebaseUid);
+  axios.get(`${baseUrl}/userEntry/user/${firebaseUid}`)
+    .then((result) => {
+      const userInfo = result.data;
+      resolve(userInfo);
+    })
+    .catch((err) => reject(err));
+});
 
-// const getTabByUserId
-
-// const getAllIntervalResources = (intervalId) => new Promise((resolve, reject) => {
-//   axios.get(`${baseUrl}/intervals/${intervalId}`)
-//     .then((result) => {
-//       const intervalInfo = result.data;
-//       resolve(intervalInfo);
-//     })
-//     .catch((err) => reject(err));
-// });
-
-// export default { getAllIntervalResources };
+export default { getAllUserEntries };

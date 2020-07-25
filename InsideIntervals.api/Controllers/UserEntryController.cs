@@ -37,11 +37,32 @@ namespace InsideIntervals.api.Controllers
             return Created("", newUserEntry);
         }
 
-        //api/images/123
+        [HttpGet("user/{firebaseUid}")]
+        public IActionResult GetAllUserEntriesByFirebaseUid(string firebaseUid)
+       {
+            var allUserEntries = _repo.GetUserEntriesByFirebaseUid(firebaseUid);
+            var results = new List<UserEntryViewModel>();
+            foreach (var entry in allUserEntries)
+            {
+                var retrieveUserFile = _repo.GetFileById(entry.UploadedFileId);
+                var result = new UserEntryViewModel
+                {
+                    EntryId = entry.EntryId,
+                    FirebaseUid = entry.FirebaseUid,
+                    EntryName = entry.EntryName,
+                    EntryInput = entry.EntryInput,
+                    File = retrieveUserFile
+                };
+                results.Add(result);
+            }
+            return Ok(results);
+        }
+
+        //api/userEntry/123
         [HttpGet("{id}")]
         public IActionResult GetFile(int id)
         {
-            var uploadedFile = _repo.GetById(id);
+            var uploadedFile = _repo.GetFileById(id);
 
             return File(uploadedFile.FileContent, uploadedFile.FileContentType);
         }

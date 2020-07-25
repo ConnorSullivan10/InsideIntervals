@@ -45,7 +45,19 @@ namespace InsideIntervals.api.DataAccess
             }
         }
 
-        public UploadedFile GetById(int fileId)
+        public IEnumerable<UserEntry> GetUserEntriesByFirebaseUid(string firebaseUid)
+        {
+            var sql = @"Select * From UserProfileEntry Where FirebaseUid = @firebaseUid";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<UserEntry>(sql, new { FirebaseUid = firebaseUid });
+            }
+
+        }
+
+
+        public UploadedFile GetFileById(int fileId)
         {
             var sql = @"Select * From Files Where Id = @fileId";
 
@@ -55,5 +67,7 @@ namespace InsideIntervals.api.DataAccess
             }
 
         }
+
+
     }
 }

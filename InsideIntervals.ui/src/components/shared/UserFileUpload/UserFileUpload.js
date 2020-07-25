@@ -20,7 +20,6 @@ class UserFileUpload extends Component {
 
     fileChanged = (e) => {
       e.preventDefault();
-      console.log(e.target);
       this.setState({ file: e.target.files[0] });
     }
 
@@ -39,16 +38,16 @@ class UserFileUpload extends Component {
         <div className="userFileUpload">
           <form>
             <div className="form-group">
-              <label for="journalTitleEntry">Journal Entry Title</label>
+              <label htmlFor="journalTitleEntry">Journal Entry Title</label>
               <input type="email" className="form-control" id="journalTitleEntry" placeholder="Enter the title for your journal entry" onChange={this.titleChange} value={title}/>
             </div>
             <div className="form-group">
-              <label for="journalDescription">Details</label>
-              <textarea class="form-control" id="journalDescription" rows="3" aria-describedby="journalEntry" onChange={this.journalEntryChange} value={journalEntry}></textarea>
+              <label htmlFor="journalDescription">Details</label>
+              <textarea className="form-control" id="journalDescription" rows="3" aria-describedby="journalEntry" onChange={this.journalEntryChange} value={journalEntry}></textarea>
               <small id="journalEntry" className="form-text text-muted">Enter details regarding what you need to work on, or have been practicing.</small>
             </div>
             <div className="form-group">
-              <label for="exampleFormControlFile1">File To Upload</label>
+              <label htmlFor="exampleFormControlFile1">File To Upload</label>
               <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={this.fileChanged} />
             </div>
             <button type="submit" className="btn btn-primary" onClick={this.saveNewUserEntry}>Submit</button>
