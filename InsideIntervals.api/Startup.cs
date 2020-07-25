@@ -53,7 +53,7 @@ namespace InsideIntervals.api
                 }
                 );
 
-            services.AddTransient<UsersRepo>();
+            services.AddTransient<UserEntryRepo>();
             services.AddTransient<IntervalsRepo>();
             services.AddSingleton<IConfiguration>(Configuration);
         }

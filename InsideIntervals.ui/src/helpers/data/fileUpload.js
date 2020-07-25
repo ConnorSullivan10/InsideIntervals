@@ -1,15 +1,16 @@
 import axios from 'axios';
+import auth from './auth';
 import { baseUrl } from '../apiKeys.json';
 
 const uploadFile = (file) => new Promise((resolve, reject) => {
   const form = new FormData();
   // adding field to form being submitted to server, and setting field equal to raw contents of chosen file
-  form.append('file', file.raw);
+  form.append('file', file);
   // debugger; DELETE WHEN FINISHED USING
 
-  axios.post(`${baseUrl}/tabs`, form)
-    .then(() => {
-      console.log('the tab upload worked');
+  axios.post(`${baseUrl}/userEntry`, form)
+    .then((response) => {
+      console.log(response.data);
       resolve();
     })
     .catch((error) => reject(error));
