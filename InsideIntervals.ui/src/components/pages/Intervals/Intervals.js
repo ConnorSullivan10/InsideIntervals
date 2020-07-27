@@ -1,4 +1,5 @@
 import React from 'react';
+import { Accordion } from 'react-bootstrap';
 import ModesCollapse from '../../shared/ModesCollapse/ModesCollapse';
 import ChordsCollapse from '../../shared/ChordsCollapse/ChordsCollapse';
 import SelectAnInterval from '../../shared/SelectAnInterval/SelectAnInterval';
@@ -10,8 +11,10 @@ class Intervals extends React.Component {
       <div className="Intervals">
         <h1 className="text-center">Intervals Ed</h1>
         <SelectAnInterval/>
-        <ModesCollapse/>
-        <ChordsCollapse/>
+        <Accordion>
+          <ModesCollapse/>
+          <ChordsCollapse/>
+        </Accordion>
       </div>
     );
   }

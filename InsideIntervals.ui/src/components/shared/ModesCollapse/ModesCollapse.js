@@ -1,26 +1,21 @@
 // import $ from 'jquery';
 import React from 'react';
+import { Accordion, Card, Button } from 'react-bootstrap';
 import ModeTypeTabs from '../ModeTypeTabs/ModeTypeTabs';
 import './ModesCollapse.scss';
 
 class ModesCollapse extends React.Component {
   render() {
-    // const toggleShow = () => {
-    //   $('.collapse').collapse();
-    // };
     return (
       <div className="ModesCollapse">
-        <div className="accordion" id="accordionExample">
-          <div className="card">
-            <div className="card-header" id="headingOne">
-              <h5 className="mb-0">
-                <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  What are Modes?
-                </button>
-              </h5>
-            </div>
-            <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-              <div className="card-body">
+        <Card>
+          <Card.Header>
+              <Accordion.Toggle as={Button} variant="link" eventKey="1">
+              What are Modes?
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body>
               <p>
                 Modes are a great resource for both improvising and composing. They give us a great variety of harmonic choices, but it’s often difficult to remember the difference between
                 one and the other. A mode is like a scale: It is a collection of pitches which have a certain relationship between each other. Just like any major or minor scale, a mode has
@@ -35,11 +30,10 @@ class ModesCollapse extends React.Component {
                  the Baroque Period onwards. To put it differently, the modes above share all the same notes, but since they start from a different degree of the major scale, each mode has
                  a slightly different construction, and feel to it. The differences between the modes and their respective Major or Minor counterparts is often only one note.
                 </p>
-              </div>
-              <ModeTypeTabs/>
-            </div>
-          </div>
-        </div>
+                <ModeTypeTabs/>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
       </div>
     );
   }
