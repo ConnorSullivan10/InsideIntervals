@@ -70,13 +70,33 @@ namespace InsideIntervals.Controllers
         }
 
         //api/intervals/mode/{modeId}
+        [HttpGet("mode/{modeId}/image")]
+        public IActionResult GetModeImageById(int modeId)
+        {
+            var selectedMode =
+              _intervalsRepository.GetSingleModeById(modeId);
+            if (selectedMode == null) return NotFound("Couldn't find a mode image with that id");
+            return File(selectedMode.ModeImg, "image / png");
+        }
+
+        //api/intervals/mode/{modeId}
         [HttpGet("shape/{shapeId}")]
         public IActionResult GetIntervalShapeById(int shapeId)
         {
-            var selectedMode =
+            var selectedInterval =
               _intervalsRepository.GetSingleIntervalShapeById(shapeId);
-            if (selectedMode == null) return NotFound("Couldn't find an interval shape with that id");
-            return Ok(selectedMode);
+            if (selectedInterval == null) return NotFound("Couldn't find an interval shape with that id");
+            return Ok(selectedInterval);
+        }
+
+        //api/intervals/mode/{modeId}
+        [HttpGet("shape/{shapeId}/image")]
+        public IActionResult GetIntervalShapeImageById(int shapeId)
+        {
+            var selectedInterval =
+              _intervalsRepository.GetSingleIntervalShapeById(shapeId);
+            if (selectedInterval == null) return NotFound("Couldn't find an interval shape image with that id");
+            return File(selectedInterval.ShapeImgFile, "image / png");
         }
     }
 }
