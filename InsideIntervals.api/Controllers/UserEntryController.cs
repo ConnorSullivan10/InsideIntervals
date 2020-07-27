@@ -41,21 +41,7 @@ namespace InsideIntervals.api.Controllers
         public IActionResult GetAllUserEntriesByFirebaseUid(string firebaseUid)
        {
             var allUserEntries = _repo.GetUserEntriesByFirebaseUid(firebaseUid);
-            var results = new List<UserEntryViewModel>();
-            foreach (var entry in allUserEntries)
-            {
-                var retrieveUserFile = _repo.GetFileById(entry.UploadedFileId);
-                var result = new UserEntryViewModel
-                {
-                    EntryId = entry.EntryId,
-                    FirebaseUid = entry.FirebaseUid,
-                    EntryName = entry.EntryName,
-                    EntryInput = entry.EntryInput,
-                    File = retrieveUserFile
-                };
-                results.Add(result);
-            }
-            return Ok(results);
+            return Ok(allUserEntries);
         }
 
         //api/userEntry/123
