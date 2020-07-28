@@ -108,7 +108,7 @@ namespace InsideIntervals.api.DataAccess
 
         public List<IntervalShape> GetShapesByIntervalId(int intervalId)
         {
-            var shapes = GetSingleIntervalById(intervalId).ChordIds;
+            var shapes = GetSingleIntervalById(intervalId).IntervalShapeIds;
             if (shapes != null)
             { 
                 var result = shapes.Split(',')

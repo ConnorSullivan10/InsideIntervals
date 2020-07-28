@@ -1,20 +1,13 @@
 import React from 'react';
-import { Accordion } from 'react-bootstrap';
-import ModesCollapse from '../../shared/ModesCollapse/ModesCollapse';
-import ChordsCollapse from '../../shared/ChordsCollapse/ChordsCollapse';
-import SelectAnInterval from '../../shared/SelectAnInterval/SelectAnInterval';
+import SelectAnInterval from '../../shared/IntervalsSubcomponents/SelectAnInterval/SelectAnInterval';
 import './Intervals.scss';
 
 class Intervals extends React.Component {
   render() {
     return (
       <div className="Intervals">
-        <h1 className="text-center">Intervals Ed</h1>
+        <h1 className="text-center">Intervals</h1>
         <SelectAnInterval/>
-        <Accordion>
-          <ModesCollapse/>
-          <ChordsCollapse/>
-        </Accordion>
       </div>
     );
   }
