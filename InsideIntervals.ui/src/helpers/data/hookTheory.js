@@ -13,7 +13,6 @@ const getMostFrequentlyUsedChords = () => new Promise((resolve, reject) => {
   })
     .then((result) => {
       const chordData = result.data;
-      console.error(chordData);
       resolve(chordData);
     })
     .catch((err) => reject(err));
