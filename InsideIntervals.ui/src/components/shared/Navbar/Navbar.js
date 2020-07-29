@@ -13,6 +13,7 @@ class Navbar extends React.Component {
   logUserOut = (e) => {
     e.preventDefault();
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('hookApi');
     firebase.auth().signOut();
   }
 

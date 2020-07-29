@@ -1,10 +1,7 @@
 import axios from 'axios';
+import hookKeys from '../hookKeys.json';
 
-const hookTheoryAuth = () => axios.post('https://api.hooktheory.com/v1/users/auth', {
-  username: 'cksullvn',
-  password: 'nssCapstone20',
-}).then((response) => {
-  console.error(response.data);
+const hookTheoryAuth = () => axios.post('https://api.hooktheory.com/v1/users/auth', hookKeys.hookKeys).then((response) => {
   sessionStorage.setItem('hookApi', response.data.activkey);
 });
 
@@ -23,7 +20,11 @@ const getMostFrequentlyUsedChords = () => new Promise((resolve, reject) => {
 });
 
 const getMostLikelyNextChord = (chordId) => new Promise((resolve, reject) => {
-  axios.get(`https://api.hooktheory.com/v1/trends/nodes?cp=${chordId}`)
+  axios.get(`https://api.hooktheory.com/v1/trends/nodes?cp=${chordId}`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('hookApi')}`,
+    },
+  })
     .then((result) => {
       const chordData = result.data;
       resolve(chordData);
@@ -31,8 +32,12 @@ const getMostLikelyNextChord = (chordId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-const getMostLikelyNextChordInSelectedProgression = (chord1, chord2) => new Promise((resolve, reject) => {
-  axios.get(`https://api.hooktheory.com/v1/trends/nodes?cp=${chord1},${chord2}`)
+const getMostLikelyNextChordsInSelectedProgression = (chord1, chord2) => new Promise((resolve, reject) => {
+  axios.get(`https://api.hooktheory.com/v1/trends/nodes?cp=${chord1},${chord2}`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('hookApi')}`,
+    },
+  })
     .then((result) => {
       const chordData = result.data;
       resolve(chordData);
@@ -41,7 +46,11 @@ const getMostLikelyNextChordInSelectedProgression = (chord1, chord2) => new Prom
 });
 
 const getSongsThatUseSelectedProgression = (chord1, chord2) => new Promise((resolve, reject) => {
-  axios.get(`https://api.hooktheory.com/v1/trends/songs?cp=${chord1},${chord2}`)
+  axios.get(`https://api.hooktheory.com/v1/trends/songs?cp=${chord1},${chord2}`, {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('hookApi')}`,
+    },
+  })
     .then((result) => {
       const songData = result.data;
       resolve(songData);
@@ -53,6 +62,6 @@ export default {
   hookTheoryAuth,
   getMostFrequentlyUsedChords,
   getMostLikelyNextChord,
-  getMostLikelyNextChordInSelectedProgression,
+  getMostLikelyNextChordsInSelectedProgression,
   getSongsThatUseSelectedProgression,
 };
