@@ -6,9 +6,9 @@ class RelatedChord extends React.Component {
   render() {
     const { chords } = this.props;
     return (
-      <div>
-        <h2>Related Chords</h2>
-        <div className="relatedChords d-flex flex-wrap">
+      <div className="relatedChords">
+        <h4>Related Chords</h4>
+        <div className=" d-flex flex-wrap">
           {chords.map((chord) => <div className="relatedChordCard" key={chord.chordId} id={chord.chordId}>
                                               <div className="card-body">
                                                 <h5 className="card-title">{chord.chordName}</h5>

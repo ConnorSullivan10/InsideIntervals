@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  // Redirect,
   Switch,
 } from 'react-router-dom';
 import firebase from 'firebase';
@@ -10,7 +9,7 @@ import Navbar from '../components/shared/Navbar/Navbar';
 import Home from '../components/pages/Home/Home';
 import Intervals from '../components/pages/Intervals/Intervals';
 import UserProfile from '../components/pages/UserProfile/UserProfile';
-// import Login from '../components/shared/Login/Login';
+import hookTheory from '../helpers/data/hookTheory';
 
 import './App.scss';
 import fbConnection from '../helpers/data/connection';
@@ -42,6 +41,7 @@ class App extends React.Component {
         this.setState({ authed: false });
       }
     });
+    hookTheory.hookTheoryAuth();
   }
 
   componentWillUnmount() {

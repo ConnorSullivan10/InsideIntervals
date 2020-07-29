@@ -7,9 +7,9 @@ class RelatedMode extends React.Component {
   render() {
     const { modes } = this.props;
     return (
-      <div>
-        <h2>Related Modes</h2>
-        <div className="relatedChords d-flex flex-wrap">
+      <div className="relatedModes">
+        <h4>Related Modes</h4>
+        <div className="d-flex flex-wrap">
             {modes.map((mode) => <div className="relatedModeCard" key={mode.modeId} id={mode.modeId}>
                                                 <div className="card-body">
                                                   <img className="card-img-top" src={`${baseUrl}/intervals/mode/${mode.modeId}/image`} alt="relatedModeImg"></img>

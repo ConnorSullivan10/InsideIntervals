@@ -15,8 +15,9 @@ class SingleInterval extends React.Component {
     } = this.props;
     return (
       <div className="SingleInterval" id={intervalId}>
-        <h2 className="text-center">{intervalName}</h2>
+        <h3 className="text-center">{intervalName}</h3>
         <IntervalShapes shapes={shapes}/>
+        <hr class="mt-3 mb-3"/>
         <RelatedChord chords={chords}/>
         <RelatedMode modes={modes}/>
       </div>
