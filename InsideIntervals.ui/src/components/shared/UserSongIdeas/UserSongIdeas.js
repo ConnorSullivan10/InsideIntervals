@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ChordPredictor from '../ChordPredictor/ChordPredictor';
 import './UserSongIdeas.scss';
 import hookTheory from '../../../helpers/data/hookTheory';
 
@@ -32,6 +33,7 @@ class UserSongIdeas extends Component {
                                           <p className="card-text">Probability{chord.probability}</p>
                                         </div>
                                     </div>)}
+        <ChordPredictor mostCommonChords={mostCommonChords} />
       </div>
     );
   }
