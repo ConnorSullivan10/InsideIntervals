@@ -216,7 +216,7 @@ class SelectAnInterval extends React.Component {
             </div>
           </div>
         </form>
-        <hr class="my-3"/>
+        <hr className="my-3"/>
         { renderIntervalDetails() }
       </div>
     );

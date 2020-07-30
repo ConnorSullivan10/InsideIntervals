@@ -1,29 +1,65 @@
 import React from 'react';
+import $ from 'jquery';
 import hookTheory from '../../../helpers/data/hookTheory';
 
 class ChordPredictor extends React.Component {
   state = {
     selectedOption: '',
-    viewResults: false,
+    viewChordResults: false,
+    viewSongResults: false,
     chordName: '',
     nextChordsPredicted: [],
+    songsThatUseThoseChords: [],
   }
 
-  handleChordChange = (changeEvent) => {
-    const chordId = changeEvent.target.value;
-    hookTheory.getMostLikelyNextChord(chordId)
-      .then((result) => {
-        this.setState({
-          selectedOption: chordId,
-          viewResults: true,
-          nextChordsPredicted: result,
-        });
-      });
+  handleCheckboxLimit = () => {
+    const limit = 2;
+    const checkboxes = $('input[type="checkbox"]');
+    checkboxes.change(() => {
+      const current = checkboxes.filter(':checked').length;
+      checkboxes.filter(':not(:checked)').prop('disabled', current >= limit);
+    });
+  };
+
+  handleChordSubmit = () => {
+    const checkedBoxes = $('input[type="checkbox"]').filter(':checked').toString().toArray();
+    // $('input:checkbox[name=type]:checked').each(() => {
+    //   checkedBoxes.push($(this).val());
+    // });
+    console.error(checkedBoxes);
+    // if (checkedBoxes.length === 1) {
+    //   const chordId = checkedBoxes[0];
+    //   hookTheory.getMostLikelyNextChord(chordId)
+    //     .then((result) => {
+    //       this.setState({
+    //         selectedOption: chordId,
+    //         viewChordResults: true,
+    //         nextChordsPredicted: result,
+    //       });
+    //     });
+    // } else if (checkedBoxes.length === 2) {
+    //   const chord1 = checkedBoxes[0];
+    //   const chord2 = checkedBoxes[1];
+    //   hookTheory.getMostLikelyNextChordsInSelectedProgression(chord1, chord2)
+    //     .then((result) => {
+    //       this.setState({
+    //         viewChordResults: true,
+    //         nextChordsPredicted: result,
+    //       });
+    //     });
+    //   hookTheory.getSongsThatUseSelectedProgression(chord1, chord2)
+    //     .then((result) => {
+    //       this.setState({
+    //         viewSongResults: true,
+    //         songsThatUseThoseChords: result,
+    //       });
+    //     });
+    // }
   }
 
   render() {
     const {
-      selectedOption,
+      // selectedOption,
       viewResults,
       nextChordsPredicted,
     } = this.state;
@@ -50,24 +86,16 @@ class ChordPredictor extends React.Component {
     };
     return (
       <div className="ChordPredictor">
-        <h4 className="text-center">Select a chord from the options below, to see what chords options would most likely work next in the progression.</h4>
-        <form className="text-center">
-          {mostCommonChords.map((chord) => <div className="form-check col">
-                                              <label>
-                                                <input
-                                                type="radio"
-                                                name="react-tips"
-                                                value= {chord.child_path}
-                                                className="form-check-input"
-                                                checked= {selectedOption === `${chord.child_path}` }
-                                                onChange={this.handleChordChange}
-                                                />
-                                                <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
-                                              </label>
-                                            </div>)
+        <p><strong>Select 1 or 2 chords from the options below, to see what next chords options would most likely work next in the progression.</strong></p>
+        <form className="text-center" onChange={this.handleCheckboxLimit}>
+          {mostCommonChords.map((chord) => <div key={chord.chord_ID}>
+                                            <input className="chord-checkbox" type="checkbox" name={chord.chord_ID} value={chord.child_path} onChange={this.handleCheckboxLimit}/>
+                                            <label htmlFor={chord.chord_ID}><div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} /></label><br/>
+                                           </div>)
           }
+          <input type="submit" value="Submit" onClick={this.handleChordSubmit}></input>
         </form>
-        <hr class="my-3"/>
+        <hr className="my-3"/>
         { renderChordPredictor() }
       </div>
     );
