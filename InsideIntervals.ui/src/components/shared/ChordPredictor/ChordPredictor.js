@@ -21,40 +21,40 @@ class ChordPredictor extends React.Component {
     });
   };
 
-  handleChordSubmit = () => {
-    const checkedBoxes = $('input[type="checkbox"]').filter(':checked').toString().toArray();
-    // $('input:checkbox[name=type]:checked').each(() => {
-    //   checkedBoxes.push($(this).val());
-    // });
-    console.error(checkedBoxes);
-    // if (checkedBoxes.length === 1) {
-    //   const chordId = checkedBoxes[0];
-    //   hookTheory.getMostLikelyNextChord(chordId)
-    //     .then((result) => {
-    //       this.setState({
-    //         selectedOption: chordId,
-    //         viewChordResults: true,
-    //         nextChordsPredicted: result,
-    //       });
-    //     });
-    // } else if (checkedBoxes.length === 2) {
-    //   const chord1 = checkedBoxes[0];
-    //   const chord2 = checkedBoxes[1];
-    //   hookTheory.getMostLikelyNextChordsInSelectedProgression(chord1, chord2)
-    //     .then((result) => {
-    //       this.setState({
-    //         viewChordResults: true,
-    //         nextChordsPredicted: result,
-    //       });
-    //     });
-    //   hookTheory.getSongsThatUseSelectedProgression(chord1, chord2)
-    //     .then((result) => {
-    //       this.setState({
-    //         viewSongResults: true,
-    //         songsThatUseThoseChords: result,
-    //       });
-    //     });
-    // }
+  handleChordSubmit = (e) => {
+    e.preventDefault();
+    const filterCheckedBoxes = $('input[type="checkbox"]').filter(':checked');
+    const checkedBoxes = [];
+    filterCheckedBoxes.each((i, property) => checkedBoxes.push(property.value));
+    if (checkedBoxes.length === 1) {
+      const chordId = checkedBoxes[0];
+      hookTheory.getMostLikelyNextChord(chordId)
+        .then((result) => {
+          this.setState({
+            selectedOption: chordId,
+            viewChordResults: true,
+            nextChordsPredicted: result,
+          });
+        });
+    } else if (checkedBoxes.length === 2) {
+      const chord1 = checkedBoxes[0];
+      const chord2 = checkedBoxes[1];
+      hookTheory.getMostLikelyNextChordsInSelectedProgression(chord1, chord2)
+        .then((result) => {
+          console.error(result);
+          this.setState({
+            viewChordResults: true,
+            nextChordsPredicted: result,
+          });
+        });
+      hookTheory.getSongsThatUseSelectedProgression(chord1, chord2)
+        .then((result) => {
+          this.setState({
+            viewSongResults: true,
+            songsThatUseThoseChords: result,
+          });
+        });
+    }
   }
 
   render() {
