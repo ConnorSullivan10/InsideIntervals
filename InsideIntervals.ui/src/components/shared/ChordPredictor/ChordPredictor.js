@@ -57,9 +57,10 @@ class ChordPredictor extends React.Component {
 
   render() {
     const {
-      // selectedOption,
+      viewSongResults,
       viewChordResults,
       nextChordsPredicted,
+      songsThatUseThoseChords,
     } = this.state;
     const { mostCommonChords } = this.props;
     function createMarkup(chordHTML) {
@@ -82,6 +83,26 @@ class ChordPredictor extends React.Component {
         <div></div>
       );
     };
+    const renderRelatedSongs = () => {
+      if (viewSongResults === true) {
+        return (
+          <div className="results">
+            <p>Related songs</p>
+            {songsThatUseThoseChords.map((song) => <div className="card" key={song.song}>
+                                        <div className="card-body">
+                                          <p className="card-text">Artist: {song.artist}</p>
+                                          <p className="card-text">Section: {song.section}</p>
+                                          <p className="card-text">Song: {song.song}</p>
+                                          <a className="card-text" href={song.url} target="_blank" rel="noopener noreferrer">Listen On Hooktheory</a>
+                                        </div>
+                                    </div>)}
+          </div>
+        );
+      }
+      return (
+        <div></div>
+      );
+    };
     return (
       <div className="ChordPredictor">
         <p><strong>Select 1 or 2 chords from the options below, to see what next chords options would most likely work next in the progression.</strong></p>
@@ -95,6 +116,7 @@ class ChordPredictor extends React.Component {
         <input id="chordSubmit" type="submit" value="Submit" onClick={this.handleChordSubmit}></input>
         <hr className="my-3"/>
         { renderChordPredictor() }
+        { renderRelatedSongs() }
       </div>
     );
   }
