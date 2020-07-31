@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "bulma": "^0.9.0",
     "eslint-plugin-react-hooks": "^4.0.8",
     "firebase": "^7.16.0",
     "jquery": "^3.5.1",
@@ -19,7 +20,8 @@
     "react-responsive-carousel": "^3.2.9",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "reactstrap": "^8.5.1"
+    "reactstrap": "^8.5.1",
+    "teoria": "^2.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
