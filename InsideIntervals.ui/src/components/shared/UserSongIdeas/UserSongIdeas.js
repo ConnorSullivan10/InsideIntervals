@@ -21,18 +21,18 @@ class UserSongIdeas extends Component {
     const {
       mostCommonChords,
     } = this.state;
-    function createMarkup(chordHTML) {
-      return { __html: chordHTML };
-    }
+    // function createMarkup(chordHTML) {
+    //   return { __html: chordHTML };
+    // }
     return (
       <div className="userSongIdeas">
         <h3>Here are some of the most commonly used Chords used in today's top radio hits; based on data pulled from the Hooktheory.com database</h3>
-        {mostCommonChords.map((chord) => <div className="card" id={chord.chord_ID} key={chord.chord_ID}>
+        {/* {mostCommonChords.map((chord) => <div className="card" id={chord.chord_ID} key={chord.chord_ID}>
                                         <div className="card-body">
                                           <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
                                           <p className="card-text">Probability{chord.probability}</p>
                                         </div>
-                                    </div>)}
+                                    </div>)} */}
         <ChordPredictor mostCommonChords={mostCommonChords} />
       </div>
     );
