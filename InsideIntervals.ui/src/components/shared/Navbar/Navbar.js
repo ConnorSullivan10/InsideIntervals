@@ -72,7 +72,7 @@ class Navbar extends React.Component {
         <div className="collapse navbar-collapse order-1" id="navbarText">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link" href="/Intervals">Get Started<span className="sr-only">(current)</span></a>
+              <a className="nav-link" href="/Intervals">Start Learning<span className="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>

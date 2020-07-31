@@ -1,3 +1,34 @@
 #homeHero{
   background-color: orange;
 }
+
+.rows{
+  display: flex;
+  flex-direction: column;
+}
+
+#heroLevel {
+  margin: auto;
+  width: 85%;
+}
+
+#heroTitle {
+  color: black;
+}
+
+#heroSubtitle {
+  color: black;
+}
+
+#getStartedBtn {
+  background-color: orange;
+  border-color: black;
+  color: white;
+  font-weight: bold;
+
+}
+    #getStartedBtn:hover {
+      background-color: black;
+      border-color: white;
+      color:orange;
+    }
