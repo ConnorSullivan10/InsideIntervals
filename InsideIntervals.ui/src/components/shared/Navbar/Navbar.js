@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import logo from '../../../images/insideIntervalsLogo.PNG';
 import './Navbar.scss';
-// import authButton from '../../../images/authButton.PNG';
 
 class Navbar extends React.Component {
   static propTypes = {

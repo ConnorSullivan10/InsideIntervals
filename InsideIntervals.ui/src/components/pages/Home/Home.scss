@@ -31,4 +31,34 @@
       background-color: black;
       border-color: white;
       color:orange;
+      box-shadow: 0 0 25px rgba(33,33,33,.2); 
     }
+
+#homeTileContainer {
+  margin-top: 2rem;
+}
+
+#homeSection2 {
+  background-color: orange;
+}
+
+#section2Tiles {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#tile1, #tile2 {
+  transition: box-shadow .3s;
+  border-radius:10px;
+  border: 2px solid #ccc;
+  background: #fff;
+  float: left;
+}
+#tile1:hover, #tile2:hover {
+  box-shadow: 0 0 25px rgba(33,33,33,.2); 
+}
+
+#tile3 {
+  width: 90%;
+  margin: 0 auto;
+}
