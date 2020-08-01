@@ -70,6 +70,8 @@ class ChordPredictor extends React.Component {
       if (viewChordResults === true) {
         return (
           <div className="results">
+            <hr className="my-3"/>
+            <p className="is-size-5">Most Likely Next Chords In Progression</p>
             {nextChordsPredicted.map((chord) => <div className="card" id={chord.chord_ID} key={chord.chord_ID}>
                                         <div className="card-body">
                                           <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
@@ -87,7 +89,7 @@ class ChordPredictor extends React.Component {
       if (viewSongResults === true) {
         return (
           <div className="results">
-            <p>Related songs</p>
+            <p className="is-size-5">Songs That Use The Selected Progression</p>
             {songsThatUseThoseChords.map((song) => <div className="card" key={song.song}>
                                         <div className="card-body">
                                           <p className="card-text">Artist: {song.artist}</p>
@@ -104,17 +106,16 @@ class ChordPredictor extends React.Component {
       );
     };
     return (
-      <div className="ChordPredictor">
-        <p><strong>Select 1 or 2 chords from the options below, to see what next chords options would most likely work next in the progression.</strong></p>
-        <form className="form-group" onChange={this.handleCheckboxLimit}>
-          {mostCommonChords.map((chord) => <div key={chord.chord_ID} className="wrap">
+      <div className="ChordPredictor box">
+        <p><strong>Select 1 or 2 chords from the options below, to see what chords options (using the Nashville Number System notation) would most likely work next in your progression.</strong></p>
+        <form className="form-group" onChange={this.handleCheckboxLimit} id="chordRadioBox d-flex flex-row flex-wrap">
+          {mostCommonChords.map((chord) => <div key={chord.chord_ID} className="wrap checkboxWrap is-one-fourth">
                                             <input className="chord-checkbox" type="checkbox" name={chord.chord_ID} value={chord.child_path} onChange={this.handleCheckboxLimit}/>
                                             <label htmlFor={chord.chord_ID}><div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} /></label><br/>
                                            </div>)
           }
         </form>
         <input id="chordSubmit" type="submit" value="Submit" onClick={this.handleChordSubmit}></input>
-        <hr className="my-3"/>
         { renderChordPredictor() }
         { renderRelatedSongs() }
       </div>

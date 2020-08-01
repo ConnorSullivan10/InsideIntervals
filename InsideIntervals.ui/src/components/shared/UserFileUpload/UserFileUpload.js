@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import UserJournalEntries from '../UserJournalEntries/UserJournalEntries';
 import uploadFile from '../../../helpers/data/fileUpload';
+import './UserFileUpload.scss';
 
 class UserFileUpload extends Component {
     state = {
+      showForm: false,
       title: '',
       journalEntry: '',
       file: {},
+    }
+
+    showEntryForm = (e) => {
+      e.preventDefault();
+      this.setState({ showForm: true });
     }
 
     titleChange = (e) => {
@@ -28,30 +36,89 @@ class UserFileUpload extends Component {
       const { title, journalEntry, file } = this.state;
       const { firebaseUid } = this.props;
       uploadFile.uploadFile(file, title, journalEntry, firebaseUid);
+      this.setState({
+        showForm: false,
+      });
     }
+
+    // re-render needed after uploading file
 
     render() {
       const {
-        title, journalEntry,
+        showForm, title, journalEntry,
       } = this.state;
-      return (
+      const renderForm = () => {
+        if (showForm === true) {
+          return (
         <div className="userFileUpload">
-          <form>
-            <div className="form-group">
-              <label htmlFor="journalTitleEntry">Journal Entry Title</label>
-              <input type="email" className="form-control" id="journalTitleEntry" placeholder="Enter the title for your journal entry" onChange={this.titleChange} value={title}/>
+          <h1 className="title" id="myProfileTitle">My Profile</h1>
+          <article className="notification column">
+                  <div className="field is-horizontal">
+                    <div className="field-label is-normal">
+                      <label className="label">Title</label>
+                    </div>
+                    <div className="field-body">
+                      <div className="field">
+                        <p className="control is-expanded has-icons-left">
+                          <input className="input" type="text" placeholder="Title For File Or Journal Entry" onChange={this.titleChange} value={title}/>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="field is-horizontal">
+                    <div className="field-label is-normal">
+                      <label className="label">Details</label>
+                    </div>
+                    <div className="field-body">
+                      <div className="field">
+                        <div className="control">
+                          <textarea className="textarea" placeholder="Add more details regarding the file you're uploading, or journal entry regarding what you've been working on." onChange={this.journalEntryChange} value={journalEntry}></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="field is-horizontal">
+                    <div className="field-label">
+                    </div>
+                    <div className="field-body">
+                      <div className="field">
+                        <div className="control">
+                          <label htmlFor="exampleFormControlFile1">File To Upload</label>
+                          <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={this.fileChanged} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="field is-horizontal">
+                    <div className="field-label">
+                    </div>
+                    <div className="field-body">
+                      <div className="field">
+                        <div className="control">
+                          <button className="button is-primary" onClick={this.saveNewUserEntry}>
+                            Submit User Entry
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </article>
             </div>
-            <div className="form-group">
-              <label htmlFor="journalDescription">Details</label>
-              <textarea className="form-control" id="journalDescription" rows="3" aria-describedby="journalEntry" onChange={this.journalEntryChange} value={journalEntry}></textarea>
-              <small id="journalEntry" className="form-text text-muted">Enter details regarding what you need to work on, or have been practicing.</small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleFormControlFile1">File To Upload</label>
-              <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={this.fileChanged} />
-            </div>
-            <button type="submit" className="btn btn-primary" onClick={this.saveNewUserEntry}>Submit</button>
-          </form>
+          );
+        }
+        return (<div></div>);
+      };
+      return (
+        <div id="userUpload">
+          <div className="level" id="profileHeader">
+            <h1 className="title" id="myProfileTitle">My Profile</h1>
+            <button id="uploadBtn" className="button is-success is-rounded" onClick={this.showEntryForm}>Upload A File/Journal Entry</button>
+          </div>
+          { renderForm() }
+          <UserJournalEntries firebaseUid={this.props.firebaseUid}/>
         </div>
       );
     }

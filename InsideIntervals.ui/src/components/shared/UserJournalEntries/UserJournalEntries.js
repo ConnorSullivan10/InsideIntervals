@@ -24,13 +24,19 @@ class UserJournalEntries extends Component {
       userEntries,
     } = this.state;
     return (
-      <div className="singUserEntry">
-        {userEntries.map((entry) => <div className="card" id={entry.entryId} key={entry.entryId}>
-                                      <img className="card-img-top" src={`${baseUrl}/userEntry/${entry.uploadedFileId}`} alt="User file upload" />
-                                        <div className="card-body">
+      <div className="UserEntryMap d-flex flex-row flex-wrap columns" id="UserEntryMap ">
+        {userEntries.map((entry) => <div class="card userEntryCards column is-one-third" id={entry.entryId} key={entry.entryId}>
+                                      <div class="card-image">
+                                        <figure class="image">
+                                          <img src={`${baseUrl}/userEntry/${entry.uploadedFileId}`} alt="User file upload"/>
+                                        </figure>
+                                      </div>
+                                      <div class="card-content">
+                                        <div class="content">
                                           <h5 className="card-title">{entry.entryName}</h5>
                                           <p className="card-text">{entry.entryInput}</p>
                                         </div>
+                                      </div>
                                     </div>)}
       </div>
     );

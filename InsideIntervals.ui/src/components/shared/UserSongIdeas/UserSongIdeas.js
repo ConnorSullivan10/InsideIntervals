@@ -25,8 +25,8 @@ class UserSongIdeas extends Component {
     //   return { __html: chordHTML };
     // }
     return (
-      <div className="userSongIdeas">
-        <h3>Here are some of the most commonly used Chords used in today's top radio hits; based on data pulled from the Hooktheory.com database</h3>
+      <div id="userSongIdeas">
+        <p className="title">Song Assist: Chord Predictor</p>
         {/* {mostCommonChords.map((chord) => <div className="card" id={chord.chord_ID} key={chord.chord_ID}>
                                         <div className="card-body">
                                           <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
