@@ -45,29 +45,48 @@ class IntroToIntervals extends React.Component {
             </div>
           </div>
         </section>
-        <hr className="my-3"/>
-        <h2 className="text-center">Applying Intervals</h2>
-        <div
-          className="video"
-          style={{
-            position: 'relative',
-            paddingBottom: '56.25%' /* 16:9 */,
-            paddingTop: 25,
-            height: 0,
-          }}
-        >
-          <iframe
-            title="ApplyingIntervals"
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 1,
-              width: '100%',
-              height: '100%',
-            }}
-            src="https://www.youtube.com/embed/-aiPPUbG6XY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
-          />
+        <section id="introToIntervalsSection2">
+          <div className="tile is-ancestor" id="applyingIntervalsTiles">
+            <div class="tile is-parent">
+              <article class="tile is-child box" id ="tile1">
+                <div class="hero">
+                  <div class="hero-body">
+                    <p class="title">Applying Intervals</p>
+                  <div className="row"></div>
+                    <p class="subtitle">Since intervals are merely the distance between any 2 notes, once you are able to internalize the shape of an interval starting on all strings across the fretboard, then you are able to apply your knowledge in any key and starting with any note. The video on the right gives examples of how to practice this with the 7th interval.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="tile2">
+              <div className="tile is-child">
+              <div
+                className="video"
+                style={{
+                  position: 'relative',
+                  paddingBottom: '60.25%' /* 16:9 */,
+                  paddingTop: 25,
+                  height: 0,
+                }}
+              >
+                <iframe
+                  title="ApplyingIntervals"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 1,
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  src="https://www.youtube.com/embed/-aiPPUbG6XY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                />
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
+        </section>
       </div>
     );
   }
