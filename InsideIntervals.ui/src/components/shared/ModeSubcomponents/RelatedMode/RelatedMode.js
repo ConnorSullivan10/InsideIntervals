@@ -8,7 +8,7 @@ class RelatedMode extends React.Component {
     const { modes } = this.props;
     return (
       <div className="relatedModes">
-        <h4>Related Modes</h4>
+        <p className="is-size-3">Related Modes</p>
         <div className="d-flex flex-wrap">
             {modes.map((mode) => <div className="relatedModeCard" key={mode.modeId} id={mode.modeId}>
                                                 <div className="card-body">

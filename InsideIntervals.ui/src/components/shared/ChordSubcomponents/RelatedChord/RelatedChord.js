@@ -5,10 +5,10 @@ import './RelatedChord.scss';
 class RelatedChord extends React.Component {
   render() {
     const { chords } = this.props;
-    return (
-      <div className="relatedChords">
-        <h4>Related Chords</h4>
-        <div className=" d-flex flex-wrap">
+    const conditionallyReturnChords = () => {
+      if (chords !== []) {
+        return (
+          <div className=" d-flex flex-wrap">
           {chords.map((chord) => <div className="relatedChordCard" key={chord.chordId} id={chord.chordId}>
                                               <div className="card-body">
                                                 <h5 className="card-title">{chord.chordName}</h5>
@@ -17,6 +17,18 @@ class RelatedChord extends React.Component {
                                               </div>
                                   </div>)}
         </div>
+        );
+      }
+      return (
+          <div>
+            <p className="is-size-6">No common chords exist that specifically are built around this interval</p>
+          </div>
+      );
+    };
+    return (
+      <div className="relatedChords">
+        <p className="is-size-3">Related Chords</p>
+        {conditionallyReturnChords()}
         <ChordsCollapse/>
       </div>
     );

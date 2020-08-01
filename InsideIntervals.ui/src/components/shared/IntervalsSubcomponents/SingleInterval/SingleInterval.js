@@ -14,8 +14,8 @@ class SingleInterval extends React.Component {
       shapes,
     } = this.props;
     return (
-      <div className="SingleInterval" id={intervalId}>
-        <h3 className="text-center">{intervalName}</h3>
+      <div className="SingleInterval box" id={intervalId}>
+        <h3 className="text-center title">{intervalName}</h3>
         <IntervalShapes shapes={shapes}/>
         <hr class="mt-3 mb-3"/>
         <RelatedChord chords={chords}/>

@@ -14,7 +14,7 @@ class MapIntervalShapes extends React.Component {
       );
     }
     return (
-      <div className="mappedIntervalShapes d-flex flex-wrap">
+      <div className="d-flex flex-wrap" id="mappedIntervalShapes">
         {filteredShapes.map((shape) => <img key={shape.shapeId} src={`${baseUrl}/intervals/shape/${shape.shapeId}/image`} alt="fretboardShapes"></img>)}
       </div>
     );

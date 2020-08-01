@@ -50,9 +50,9 @@ class SelectAnInterval extends React.Component {
       );
     };
     return (
-      <div className="SelectAnInterval">
-        <h4 className="text-center">Select an interval from the options below to learn more about it's sound.</h4>
-        <form onSubmit={this.handleIntervalSubmit} className="text-center">
+      <section id="SelectAnInterval">
+        <h2 className="text-center title">Select an interval from the options below to learn more about it's sound.</h2>
+        <form onSubmit={this.handleIntervalSubmit} className="text-center box" id="selectIntervalRadios">
           <div className="row">
             <div className="form-check col">
               <label>
@@ -216,9 +216,8 @@ class SelectAnInterval extends React.Component {
             </div>
           </div>
         </form>
-        <hr className="my-3"/>
         { renderIntervalDetails() }
-      </div>
+      </section>
     );
   }
 }
