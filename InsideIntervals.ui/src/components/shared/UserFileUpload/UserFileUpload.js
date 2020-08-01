@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserJournalEntries from '../UserJournalEntries/UserJournalEntries';
 import uploadFile from '../../../helpers/data/fileUpload';
+import userData from '../../../helpers/data/userData';
 import './UserFileUpload.scss';
 
 class UserFileUpload extends Component {
@@ -9,6 +10,23 @@ class UserFileUpload extends Component {
       title: '',
       journalEntry: '',
       file: {},
+      userEntries: [],
+    }
+
+    componentDidUpdate(prevProps) {
+      if (this.props.firebaseUid !== prevProps.firebaseUid) {
+        this.setUserEntries();
+      }
+    }
+
+    setUserEntries = () => {
+      const { firebaseUid } = this.props;
+      userData.getAllUserEntries(firebaseUid)
+        .then((response) => {
+          this.setState({ userEntries: response });
+        })
+      // eslint-disable-next-line no-sequences
+        .catch((err) => ('error with get all User Entries', err));
     }
 
     showEntryForm = (e) => {
@@ -35,13 +53,15 @@ class UserFileUpload extends Component {
       e.preventDefault();
       const { title, journalEntry, file } = this.state;
       const { firebaseUid } = this.props;
-      uploadFile.uploadFile(file, title, journalEntry, firebaseUid);
+      uploadFile.uploadFile(file, title, journalEntry, firebaseUid)
+        .then(() => this.setUserEntries());
       this.setState({
         showForm: false,
+        title: '',
+        journalEntry: '',
+        file: {},
       });
     }
-
-    // re-render needed after uploading file
 
     render() {
       const {
@@ -118,7 +138,7 @@ class UserFileUpload extends Component {
             <button id="uploadBtn" className="button is-success is-rounded" onClick={this.showEntryForm}>Upload A File/Journal Entry</button>
           </div>
           { renderForm() }
-          <UserJournalEntries firebaseUid={this.props.firebaseUid}/>
+          <UserJournalEntries userEntries={this.state.userEntries}/>
         </div>
       );
     }

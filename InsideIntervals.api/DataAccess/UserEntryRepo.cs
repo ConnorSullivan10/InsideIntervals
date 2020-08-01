@@ -68,6 +68,52 @@ namespace InsideIntervals.api.DataAccess
 
         }
 
+        public IEnumerable<UserEntry> DeleteUserEntry(int id)
+        {
+            var sql = @"DELETE From UserProfileEntry
+                        WHERE UserProfileEntry.EntryId = @id";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { Id = id };
+
+                var results = db.Query<UserEntry>(sql, parameters);
+                return results;
+            }
+        }
+
+        //public IEnumerable<UserEntry> DeleteAllUserEntries(int id)
+        //{
+        //    var sql = @"UPDATE p
+        //                SET AccountNo = null
+        //                FROM PaymentType p
+	       //                 JOIN [User] u
+		      //                  ON u.UserId = p.UserId
+			     //                   WHERE u.UserId = @id";
+
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var parameters = new { Id = id };
+
+        //        var results = db.Query<UserEntry>(sql, parameters);
+        //        return results;
+        //    }
+        //}
+
+        //public IEnumerable<UserEntry> DeleteUserFile(int fileId)
+        //{
+        //    var sql = @"DELETE From Files
+        //                WHERE Files.Id = @fileId";
+
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var parameters = new { FileId = fileId };
+
+        //        var results = db.Query<UserEntry>(sql, parameters);
+        //        return results;
+        //    }
+        //}
+
 
     }
 }
