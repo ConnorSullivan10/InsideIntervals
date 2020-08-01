@@ -7,7 +7,6 @@ class Intervals extends React.Component {
   render() {
     return (
       <div className="Intervals">
-        <h1 className="text-center">Intervals</h1>
         <IntroToIntervals/>
         <SelectAnInterval/>
       </div>
