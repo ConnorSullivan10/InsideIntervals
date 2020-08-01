@@ -60,7 +60,7 @@ const ModeTypeTabs = (props) => {
                 <li>Lydian Mode | Interval pattern is 1-2-3-#4-5-6-7</li>
                 <li>Mixolydian Mode | Interval pattern is 1-2-3-4-5-6-b7</li>
                 <li>Aeolian Mode | Interval pattern is 1-2-b3-4-5-b6-b7</li>
-                <li>Locrian Mode | Interval pattern is 1-b2-b3-4-b5-b6-b</li>
+                <li>Locrian Mode | Interval pattern is 1-b2-b3-4-b5-b6-b7</li>
               </ul>
             </Col>
           </Row>
@@ -68,7 +68,18 @@ const ModeTypeTabs = (props) => {
         <TabPane tabId="2">
         <Row>
             <Col sm="12">
-              <h4>Melodic Minor Modes</h4>
+              <h4 className="is-size-5">Melodic Minor Modes</h4>
+              <p>Here The Seven Modes Of The Melodic Minor Scale :</p>
+              <p>The melodic minor scale is one of the most useful scales in jazz.</p>
+              <ul>
+                <li>Melodic Minor Mode | Interval pattern is 1-2-b3-4-5-6-7</li>
+                <li>Dorian b2/Phrygian #6 Mode | Interval pattern is 1-b2-b3-4-5-6-b7</li>
+                <li>Lydian Augmented Mode | Interval pattern is 1-2-3-#4-#5-6-7</li>
+                <li>Lydian Dominant (Overtone) Mode | Interval pattern is 1-2-3-#4-5-6-b7</li>
+                <li>Mixolydian b6 Mode | Interval pattern is 1-2-3-4-5-b6-b7</li>
+                <li>Aeolian b5/Locrian #2 Mode | Interval pattern is 1-2-b3-4-b5-b6-b7</li>
+                <li>Altered (Super Locrian) Mode | Interval pattern is 1-b2-b3-b4-b5-b6-b7</li>
+              </ul>
               <p></p>
             </Col>
           </Row>

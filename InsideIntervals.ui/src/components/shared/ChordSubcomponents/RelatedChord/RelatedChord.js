@@ -8,21 +8,21 @@ class RelatedChord extends React.Component {
     const conditionallyReturnChords = () => {
       if (chords !== []) {
         return (
-          <div className=" d-flex flex-wrap">
-          {chords.map((chord) => <div className="relatedChordCard" key={chord.chordId} id={chord.chordId}>
-                                              <div className="card-body">
-                                                <h5 className="card-title">{chord.chordName}</h5>
-                                                <h6 className="card-subtitle mb-2 text-muted">Intervals: {chord.chordIntervals}</h6>
-                                                <p className="card-text">{chord.chordDescription}</p>
-                                              </div>
-                                  </div>)}
-        </div>
+            <div>
+              <p className="is-size-6">No common chords exist that specifically are built around this interval.</p>
+            </div>
         );
       }
       return (
-          <div>
-            <p className="is-size-6">No common chords exist that specifically are built around this interval</p>
-          </div>
+        <div className=" d-flex flex-wrap">
+        {chords.map((chord) => <div className="relatedChordCard" key={chord.chordId} id={chord.chordId}>
+                                            <div className="card-body">
+                                              <h5 className="card-title">{chord.chordName}</h5>
+                                              <h6 className="card-subtitle mb-2 text-muted">Intervals: {chord.chordIntervals}</h6>
+                                              <p className="card-text">{chord.chordDescription}</p>
+                                            </div>
+                                </div>)}
+      </div>
       );
     };
     return (
