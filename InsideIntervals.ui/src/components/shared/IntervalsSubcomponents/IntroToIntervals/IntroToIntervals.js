@@ -28,16 +28,16 @@ class IntroToIntervals extends React.Component {
                 <div className="column">
                   <Carousel>
                     <div>
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/bOxR7nP2H4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/bOxR7nP2H4U" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
                     <div>
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/77JzblP6URE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/77JzblP6URE" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
                     <div>
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/ADoJqngXUSM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/ADoJqngXUSM" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
                     <div>
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/hxH8BiKi7M8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/hxH8BiKi7M8" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
                   </Carousel>
                 </div>
@@ -47,19 +47,19 @@ class IntroToIntervals extends React.Component {
         </section>
         <section id="introToIntervalsSection2">
           <div className="tile is-ancestor" id="applyingIntervalsTiles">
-            <div class="tile is-parent">
-              <article class="tile is-child box" id ="tile1">
-                <div class="hero">
-                  <div class="hero-body">
-                    <p class="title">Applying Intervals</p>
+            <div className="tile is-parent">
+              <article className="tile is-child box" id ="tile1">
+                <div className="hero">
+                  <div className="hero-body">
+                    <p className="title">Applying Intervals</p>
                   <div className="row"></div>
-                    <p class="subtitle">Since intervals are merely the distance between any 2 notes, once you are able to internalize the shape of an interval starting on all strings across the fretboard, then you are able to apply your knowledge in any key and starting with any note. The video on the right gives examples of how to practice this with the 7th interval.</p>
+                    <p className="subtitle">Since intervals are merely the distance between any 2 notes, once you are able to internalize the shape of an interval starting on all strings across the fretboard, then you are able to apply your knowledge in any key and starting with any note. The video on the right gives examples of how to practice this with the 7th interval.</p>
                   </div>
                 </div>
               </article>
             </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="tile2">
+          <div className="tile is-parent">
+            <article className="tile is-child box" id="tile2">
               <div className="tile is-child">
               <div
                 className="video"
@@ -79,7 +79,7 @@ class IntroToIntervals extends React.Component {
                     width: '100%',
                     height: '100%',
                   }}
-                  src="https://www.youtube.com/embed/-aiPPUbG6XY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                  src="https://www.youtube.com/embed/-aiPPUbG6XY" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
                 />
                 </div>
               </div>

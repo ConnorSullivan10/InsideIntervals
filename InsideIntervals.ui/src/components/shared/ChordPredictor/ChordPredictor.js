@@ -72,12 +72,15 @@ class ChordPredictor extends React.Component {
           <div className="results">
             <hr className="my-3"/>
             <p className="is-size-5">Most Likely Next Chords In Progression</p>
-            {nextChordsPredicted.map((chord) => <div className="card" id={chord.chord_ID} key={chord.chord_ID}>
-                                        <div className="card-body">
-                                          <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
-                                          <p className="card-text">Probability{chord.probability}</p>
-                                        </div>
-                                    </div>)}
+            <div className="d-flex flex-row flex-wrap columns" id="predictedChordsContainer">
+              {nextChordsPredicted.map((chord) => <div className="card predictedChordCards is-one-fourth" id={chord.chord_ID} key={chord.chord_ID}>
+                                          <div className="card-body">
+                                            <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
+                                            <p className="card-text">Probability:</p>
+                                            <p className="card-text">{`${(chord.probability * 100).toFixed(1)}%`}</p>
+                                          </div>
+                                      </div>)}
+            </div>
           </div>
         );
       }
@@ -88,7 +91,7 @@ class ChordPredictor extends React.Component {
     const renderRelatedSongs = () => {
       if (viewSongResults === true) {
         return (
-          <div className="results">
+          <div className="results" id="relevantSongs">
             <p className="is-size-5">Songs That Use The Selected Progression</p>
             {songsThatUseThoseChords.map((song) => <div className="card" key={song.song}>
                                         <div className="card-body">
