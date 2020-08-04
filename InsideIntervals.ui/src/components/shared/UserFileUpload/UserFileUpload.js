@@ -63,6 +63,13 @@ class UserFileUpload extends Component {
       });
     }
 
+    deleteEntry = (e) => {
+      e.preventDefault();
+      const entryIdToDelete = e.target.id;
+      userData.deleteUserEntry(entryIdToDelete)
+        .then(() => this.setUserEntries());
+    }
+
     render() {
       const {
         showForm, title, journalEntry,
@@ -138,7 +145,7 @@ class UserFileUpload extends Component {
             <button id="uploadBtn" className="button is-success is-rounded" onClick={this.showEntryForm}>Upload A File/Journal Entry</button>
           </div>
           { renderForm() }
-          <UserJournalEntries userEntries={this.state.userEntries}/>
+          <UserJournalEntries userEntries={this.state.userEntries} deleteEntry={this.deleteEntry}/>
         </div>
       );
     }

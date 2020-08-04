@@ -57,8 +57,18 @@ namespace InsideIntervals.api.Controllers
         [HttpDelete("{userEntryIdToDelete}")]
         public IActionResult DeleteUserEntry(int userEntryIdToDelete)
         {
-            var userEntryToDelete = _repo.DeleteUserEntry(userEntryIdToDelete);
-            return Ok(userEntryToDelete);
+            var userEntryToDelete = _repo.DeleteUserEntryUpload(userEntryIdToDelete);
+            var deletedFile = _repo.DeleteUserFile(userEntryToDelete.UploadedFileId);
+            return Ok(deletedFile);
+
+        }
+
+        //api/userEntry/file/1
+        [HttpDelete("file/{fileIdToDelete}")]
+        public IActionResult DeleteFile(int fileIdToDelete)
+        {
+            var fileToDelete = _repo.DeleteUserFile(fileIdToDelete);
+            return Ok(fileToDelete);
         }
     }
 }
