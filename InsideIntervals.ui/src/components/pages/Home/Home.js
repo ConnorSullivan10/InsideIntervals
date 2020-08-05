@@ -1,10 +1,57 @@
 import React from 'react';
 import heroImage from '../../../images/notation.png';
+import userData from '../../../helpers/data/userData';
 import './Home.scss';
 
 class Home extends React.Component {
-  render() {
-    return (
+state = {
+  userName: '',
+  userEmail: '',
+  feedbackSubject: '',
+  feedbackContent: '',
+}
+
+nameChange = (e) => {
+  e.preventDefault();
+  this.setState({ userName: e.target.value });
+}
+
+emailChange = (e) => {
+  e.preventDefault();
+  this.setState({ userEmail: e.target.value });
+}
+
+subjectChange = (e) => {
+  e.preventDefault();
+  this.setState({ feedbackSubject: e.target.value });
+}
+
+contentChange = (e) => {
+  e.preventDefault();
+  this.setState({ feedbackContent: e.target.value });
+}
+
+submitUserFeedback = (e) => {
+  e.preventDefault();
+  const newFeedback = {
+    UserName: this.state.userName,
+    UserEmail: this.state.userEmail,
+    FeedbackSubject: this.state.feedbackSubject,
+    FeedbackContent: this.state.feedbackContent,
+  };
+  userData.addUserFeedback(newFeedback)
+    .then(() => {
+      this.setState({
+        userName: '',
+        userEmail: '',
+        feedbackSubject: '',
+        feedbackContent: '',
+      });
+    });
+}
+
+render() {
+  return (
       <div className="Home">
         <section className="hero  is-primary" id="homeHero">
           <div className="hero-body">
@@ -87,7 +134,7 @@ class Home extends React.Component {
                     <div className="field-body">
                       <div className="field">
                         <p className="control is-expanded has-icons-left">
-                          <input className="input" type="text" placeholder="Name"/>
+                          <input className="input" type="text" placeholder="Name" value={this.state.userName} onChange={this.nameChange}/>
                           <span className="icon is-small is-left">
                             <i className="fas fa-user"></i>
                           </span>
@@ -95,7 +142,7 @@ class Home extends React.Component {
                       </div>
                       <div className="field">
                         <p className="control is-expanded has-icons-left has-icons-right">
-                          <input className="input" type="email" placeholder="Email"/>
+                          <input className="input" type="email" placeholder="Email" value={this.state.userEmail} onChange={this.emailChange}/>
                           <span className="icon is-small is-left">
                             <i className="fas fa-envelope"></i>
                           </span>
@@ -114,7 +161,7 @@ class Home extends React.Component {
                     <div className="field-body">
                       <div className="field">
                         <div className="control">
-                          <input className="input" type="text" placeholder="i.e. Suggestion"/>
+                          <input className="input" type="text" placeholder="i.e. Suggestion" value={this.state.feedbackSubject} onChange={this.subjectChange}/>
                         </div>
                       </div>
                     </div>
@@ -122,12 +169,12 @@ class Home extends React.Component {
 
                   <div className="field is-horizontal">
                     <div className="field-label is-normal">
-                      <label className="label">Question</label>
+                      <label className="label">Feedback</label>
                     </div>
                     <div className="field-body">
                       <div className="field">
                         <div className="control">
-                          <textarea className="textarea" placeholder="Explain how we can help you"></textarea>
+                          <textarea className="textarea" placeholder="Explain how we can help you" value={this.state.feedbackContent} onChange={this.contentChange}></textarea>
                         </div>
                       </div>
                     </div>
@@ -139,7 +186,7 @@ class Home extends React.Component {
                     <div className="field-body">
                       <div className="field">
                         <div className="control">
-                          <button className="button is-primary">
+                          <button className="button is-primary" onClick={this.submitUserFeedback}>
                             Send message
                           </button>
                         </div>
@@ -151,8 +198,8 @@ class Home extends React.Component {
         </div>
     </section>
   </div>
-    );
-  }
+  );
+}
 }
 
 export default Home;

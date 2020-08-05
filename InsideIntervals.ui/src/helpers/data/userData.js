@@ -12,4 +12,6 @@ const getAllUserEntries = (firebaseUid) => new Promise((resolve, reject) => {
 
 const deleteUserEntry = (entryId) => axios.delete(`${baseUrl}/userEntry/${entryId}`);
 
-export default { getAllUserEntries, deleteUserEntry };
+const addUserFeedback = (feedback) => axios.post(`${baseUrl}/userEntry/feedback`, feedback);
+
+export default { getAllUserEntries, deleteUserEntry, addUserFeedback };
