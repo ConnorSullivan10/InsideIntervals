@@ -186,7 +186,7 @@ render() {
                     <div className="field-body">
                       <div className="field">
                         <div className="control">
-                          <button className="button is-primary" data-toggle="popover" data-content="We've received your suggestion. Thanks for your feedback!"onClick={this.submitUserFeedback}>
+                          <button className="button is-primary" onClick={this.submitUserFeedback}>
                             Send message
                           </button>
                         </div>

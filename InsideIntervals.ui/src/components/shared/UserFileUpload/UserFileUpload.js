@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import UserJournalEntries from '../UserJournalEntries/UserJournalEntries';
 import uploadFile from '../../../helpers/data/fileUpload';
 import userData from '../../../helpers/data/userData';
@@ -9,7 +10,8 @@ class UserFileUpload extends Component {
       showForm: false,
       title: '',
       journalEntry: '',
-      file: {},
+      file: null,
+      showFileUploadError: false,
       userEntries: [],
     }
 
@@ -49,18 +51,53 @@ class UserFileUpload extends Component {
       this.setState({ file: e.target.files[0] });
     }
 
+    // handleChange = (event) => {
+    //   event.preventDefault();
+    //   const { name, value } = event.target;
+    //   const { errors } = this.state;
+    //   switch (name) {
+    //     case 'title':
+    //       errors.fullName = value.length < 1
+    //         ? 'There must be a name for the title!'
+    //         : '';
+    //       break;
+    //     case 'journalEntry':
+    //       errors.fullName = value.length < 1
+    //         ? 'There must be content in the journal entry!'
+    //         : '';
+    //       break;
+    //     case 'password':
+    //       errors.password = value.length < 8
+    //         ? 'Password must be 8 characters long!'
+    //         : '';
+    //       break;
+    //     default:
+    //       break;
+    //   }
+
+    //   this.setState({ errors, [name]: value }, () => {
+    //     console.log(errors);
+    //   });
+    // }
+
     saveNewUserEntry = (e) => {
       e.preventDefault();
       const { title, journalEntry, file } = this.state;
       const { firebaseUid } = this.props;
-      uploadFile.uploadFile(file, title, journalEntry, firebaseUid)
-        .then(() => this.setUserEntries());
-      this.setState({
-        showForm: false,
-        title: '',
-        journalEntry: '',
-        file: {},
-      });
+      if (file !== null) {
+        uploadFile.uploadFile(file, title, journalEntry, firebaseUid)
+          .then(() => this.setUserEntries());
+        this.setState({
+          showForm: false,
+          title: '',
+          journalEntry: '',
+          file: {},
+        });
+      } else {
+        this.setState({
+          showFileUploadError: true,
+        });
+      }
     }
 
     deleteEntry = (e) => {
@@ -72,7 +109,7 @@ class UserFileUpload extends Component {
 
     render() {
       const {
-        showForm, title, journalEntry,
+        showForm, title, journalEntry, showFileUploadError,
       } = this.state;
       const renderForm = () => {
         if (showForm === true) {
@@ -114,6 +151,7 @@ class UserFileUpload extends Component {
                         <div className="control">
                           <label htmlFor="exampleFormControlFile1">File To Upload</label>
                           <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={this.fileChanged} required/>
+                          {showFileUploadError ? (<p class="alert-danger">You must attach a file to your submission.</p>) : ''}
                         </div>
                       </div>
                     </div>
