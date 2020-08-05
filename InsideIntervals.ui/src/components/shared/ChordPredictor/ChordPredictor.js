@@ -29,28 +29,50 @@ class ChordPredictor extends React.Component {
       const chordId = checkedBoxes[0];
       hookTheory.getMostLikelyNextChord(chordId)
         .then((result) => {
-          this.setState({
-            viewChordResults: true,
-            nextChordsPredicted: result,
-          });
+          if (!result.includes('null')) {
+            this.setState({
+              viewChordResults: true,
+              nextChordsPredicted: result,
+            });
+          } else {
+            this.setState({
+              viewChordResultErrorMessage: true,
+            });
+          }
         });
     } else if (checkedBoxes.length === 2) {
       const chord1 = checkedBoxes[0];
       const chord2 = checkedBoxes[1];
       hookTheory.getMostLikelyNextChordsInSelectedProgression(chord1, chord2)
         .then((result) => {
-          console.error(result);
-          this.setState({
-            viewChordResults: true,
-            nextChordsPredicted: result,
-          });
+          if (!result.includes('null')) {
+            console.error(result);
+            this.setState({
+              viewChordResults: true,
+              nextChordsPredicted: result,
+              viewChordResultErrorMessage: false,
+            });
+          } else {
+            this.setState({
+              viewChordResultErrorMessage: true,
+              viewChordResults: false,
+            });
+          }
         });
       hookTheory.getSongsThatUseSelectedProgression(chord1, chord2)
         .then((result) => {
-          this.setState({
-            viewSongResults: true,
-            songsThatUseThoseChords: result,
-          });
+          if (!result.includes('null')) {
+            this.setState({
+              viewSongResults: true,
+              songsThatUseThoseChords: result,
+              viewSongResultErrorMessage: false,
+            });
+          } else {
+            this.setState({
+              viewSongResultErrorMessage: true,
+              viewSongResults: false,
+            });
+          }
         });
     }
   }
@@ -61,12 +83,15 @@ class ChordPredictor extends React.Component {
       viewChordResults,
       nextChordsPredicted,
       songsThatUseThoseChords,
+      viewChordResultErrorMessage,
+      viewSongResultErrorMessage,
     } = this.state;
     const { mostCommonChords } = this.props;
     function createMarkup(chordHTML) {
       return { __html: chordHTML };
     }
     const renderChordPredictor = () => {
+      console.error(songsThatUseThoseChords);
       if (viewChordResults === true) {
         return (
           <div className="results">
@@ -85,7 +110,11 @@ class ChordPredictor extends React.Component {
         );
       }
       return (
-        <div></div>
+        <div>
+        {viewChordResultErrorMessage
+          ? (<p className="is-size-5">Unfortunately the database didn't return any predicted chords based on the selected progression.</p>)
+          : (<div></div>)}
+        </div>
       );
     };
     const renderRelatedSongs = () => {
@@ -105,7 +134,11 @@ class ChordPredictor extends React.Component {
         );
       }
       return (
-        <div></div>
+        <div>
+        {viewSongResultErrorMessage
+          ? (<p className="is-size-5">Unfortunately the database didn't return any songs that contain the selected progression.</p>)
+          : (<div></div>)}
+        </div>
       );
     };
     return (
