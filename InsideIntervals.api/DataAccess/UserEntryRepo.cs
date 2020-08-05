@@ -98,6 +98,18 @@ namespace InsideIntervals.api.DataAccess
             }
         }
 
+        public UserFeedback AddUserFeedback(UserFeedback feedbackToAdd)
+        {
+            var sql = @"insert into UserFeedback(UserName,UserEmail,FeedbackSubject,FeedbackContent)
+                        output inserted.*
+                        values(@UserName,@UserEmail,@FeedbackSubject,@FeedbackContent)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<UserFeedback>(sql, feedbackToAdd);
+                return result;
+            }
+        }
 
     }
 }

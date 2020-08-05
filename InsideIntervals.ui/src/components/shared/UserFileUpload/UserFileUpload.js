@@ -79,7 +79,7 @@ class UserFileUpload extends Component {
           return (
         <div className="userFileUpload">
           <h1 className="title" id="myProfileTitle">My Profile</h1>
-          <article className="notification column">
+          <form className="notification column">
                   <div className="field is-horizontal">
                     <div className="field-label is-normal">
                       <label className="label">Title</label>
@@ -87,7 +87,7 @@ class UserFileUpload extends Component {
                     <div className="field-body">
                       <div className="field">
                         <p className="control is-expanded has-icons-left">
-                          <input className="input" type="text" placeholder="Title For File Or Journal Entry" onChange={this.titleChange} value={title}/>
+                          <input className="input" type="text" placeholder="Title For File Or Journal Entry" onChange={this.titleChange} value={title} required/>
                         </p>
                       </div>
                     </div>
@@ -100,7 +100,7 @@ class UserFileUpload extends Component {
                     <div className="field-body">
                       <div className="field">
                         <div className="control">
-                          <textarea className="textarea" placeholder="Add more details regarding the file you're uploading, or journal entry regarding what you've been working on." onChange={this.journalEntryChange} value={journalEntry}></textarea>
+                          <textarea className="textarea" placeholder="Add more details regarding the file you're uploading, or journal entry regarding what you've been working on." onChange={this.journalEntryChange} value={journalEntry} required></textarea>
                         </div>
                       </div>
                     </div>
@@ -113,7 +113,7 @@ class UserFileUpload extends Component {
                       <div className="field">
                         <div className="control">
                           <label htmlFor="exampleFormControlFile1">File To Upload</label>
-                          <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={this.fileChanged} />
+                          <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={this.fileChanged} required/>
                         </div>
                       </div>
                     </div>
@@ -132,7 +132,7 @@ class UserFileUpload extends Component {
                       </div>
                     </div>
                   </div>
-            </article>
+            </form>
             </div>
           );
         }

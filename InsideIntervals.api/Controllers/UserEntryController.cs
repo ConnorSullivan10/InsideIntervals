@@ -70,5 +70,12 @@ namespace InsideIntervals.api.Controllers
             var fileToDelete = _repo.DeleteUserFile(fileIdToDelete);
             return Ok(fileToDelete);
         }
+
+        [HttpPost("feedback")]
+        public IActionResult NewUserFeedback(UserFeedback feedbackToAdd)
+        {
+            var newUserFeedback = _repo.AddUserFeedback(feedbackToAdd);
+            return Created("", newUserFeedback);
+        }
     }
 }
