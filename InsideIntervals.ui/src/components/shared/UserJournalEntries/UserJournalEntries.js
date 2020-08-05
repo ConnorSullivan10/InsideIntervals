@@ -7,10 +7,10 @@ class UserJournalEntries extends Component {
     const { userEntries } = this.props;
     return (
       <div className="UserEntryMap d-flex flex-row flex-wrap columns" id="UserEntryMap ">
-        {userEntries.map((entry) => <div className="card userEntryCards column is-one-third" id={entry.entryId} key={entry.entryId}>
+        {userEntries.map((entry) => <div className="card userEntryCards column" id={entry.entryId} key={entry.entryId}>
                                       <button className="btn btn-md btn-danger" id={entry.entryId} onClick={this.props.deleteEntry}>Delete</button>
                                       <div className="card-image">
-                                        <figure className="image">
+                                        <figure className="image userEntryCardImg">
                                           <img src={`${baseUrl}/userEntry/${entry.uploadedFileId}`} alt="User file upload"/>
                                         </figure>
                                       </div>

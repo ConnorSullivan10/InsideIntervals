@@ -9,6 +9,7 @@ state = {
   userEmail: '',
   feedbackSubject: '',
   feedbackContent: '',
+  emailValidationError: false,
 }
 
 nameChange = (e) => {
@@ -33,21 +34,27 @@ contentChange = (e) => {
 
 submitUserFeedback = (e) => {
   e.preventDefault();
-  const newFeedback = {
-    UserName: this.state.userName,
-    UserEmail: this.state.userEmail,
-    FeedbackSubject: this.state.feedbackSubject,
-    FeedbackContent: this.state.feedbackContent,
-  };
-  userData.addUserFeedback(newFeedback)
-    .then(() => {
-      this.setState({
-        userName: '',
-        userEmail: '',
-        feedbackSubject: '',
-        feedbackContent: '',
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.userEmail)) {
+    const newFeedback = {
+      UserName: this.state.userName,
+      UserEmail: this.state.userEmail,
+      FeedbackSubject: this.state.feedbackSubject,
+      FeedbackContent: this.state.feedbackContent,
+    };
+    userData.addUserFeedback(newFeedback)
+      .then(() => {
+        this.setState({
+          userName: '',
+          userEmail: '',
+          feedbackSubject: '',
+          feedbackContent: '',
+          emailValidationError: false,
+        });
       });
-    });
+  }
+  this.setState({
+    emailValidationError: true,
+  });
 }
 
 render() {
@@ -143,12 +150,7 @@ render() {
                       <div className="field">
                         <p className="control is-expanded has-icons-left has-icons-right">
                           <input className="input" type="email" placeholder="Email" value={this.state.userEmail} onChange={this.emailChange}/>
-                          <span className="icon is-small is-left">
-                            <i className="fas fa-envelope"></i>
-                          </span>
-                          <span className="icon is-small is-right">
-                            <i className="fas fa-check"></i>
-                          </span>
+                          {this.state.emailValidationError ? (<p class="alert-danger">Please enter a valid email.</p>) : ''}
                         </p>
                       </div>
                     </div>

@@ -6,7 +6,7 @@ class RelatedChord extends React.Component {
   render() {
     const { chords } = this.props;
     const conditionallyReturnChords = () => {
-      if (chords !== []) {
+      if (chords.length === 0) {
         return (
             <div>
               <p className="is-size-6">No common chords exist that specifically are built around this interval.</p>
