@@ -21,18 +21,9 @@ class UserSongIdeas extends Component {
     const {
       mostCommonChords,
     } = this.state;
-    // function createMarkup(chordHTML) {
-    //   return { __html: chordHTML };
-    // }
     return (
       <div id="userSongIdeas">
         <p className="title">Song Assist: Chord Predictor</p>
-        {/* {mostCommonChords.map((chord) => <div className="card" id={chord.chord_ID} key={chord.chord_ID}>
-                                        <div className="card-body">
-                                          <div dangerouslySetInnerHTML={createMarkup(chord.chord_HTML)} />
-                                          <p className="card-text">Probability{chord.probability}</p>
-                                        </div>
-                                    </div>)} */}
         <ChordPredictor mostCommonChords={mostCommonChords} />
       </div>
     );

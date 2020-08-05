@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import UserJournalEntries from '../UserJournalEntries/UserJournalEntries';
 import uploadFile from '../../../helpers/data/fileUpload';
 import userData from '../../../helpers/data/userData';
@@ -51,35 +50,6 @@ class UserFileUpload extends Component {
       this.setState({ file: e.target.files[0] });
     }
 
-    // handleChange = (event) => {
-    //   event.preventDefault();
-    //   const { name, value } = event.target;
-    //   const { errors } = this.state;
-    //   switch (name) {
-    //     case 'title':
-    //       errors.fullName = value.length < 1
-    //         ? 'There must be a name for the title!'
-    //         : '';
-    //       break;
-    //     case 'journalEntry':
-    //       errors.fullName = value.length < 1
-    //         ? 'There must be content in the journal entry!'
-    //         : '';
-    //       break;
-    //     case 'password':
-    //       errors.password = value.length < 8
-    //         ? 'Password must be 8 characters long!'
-    //         : '';
-    //       break;
-    //     default:
-    //       break;
-    //   }
-
-    //   this.setState({ errors, [name]: value }, () => {
-    //     console.log(errors);
-    //   });
-    // }
-
     saveNewUserEntry = (e) => {
       e.preventDefault();
       const { title, journalEntry, file } = this.state;
@@ -91,7 +61,7 @@ class UserFileUpload extends Component {
           showForm: false,
           title: '',
           journalEntry: '',
-          file: {},
+          file: null,
         });
       } else {
         this.setState({
