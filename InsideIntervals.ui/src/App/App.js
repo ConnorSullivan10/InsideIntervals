@@ -32,6 +32,7 @@ class App extends React.Component {
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        hookTheory.hookTheoryAuth();
         this.setState({
           authed: true,
           userEmail: auth.getEmail(),
@@ -41,7 +42,6 @@ class App extends React.Component {
         this.setState({ authed: false });
       }
     });
-    hookTheory.hookTheoryAuth();
   }
 
   componentWillUnmount() {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import logo from '../../../images/insideIntervalsLogo.PNG';
 import './Navbar.scss';
@@ -14,6 +15,7 @@ class Navbar extends React.Component {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('hookApi');
     firebase.auth().signOut();
+    this.props.history.push('/');
   }
 
   loginClickEvent = (e) => {
@@ -42,7 +44,7 @@ class Navbar extends React.Component {
               <a className="nav-link" href="/userProfile">Profile</a>
             </li>
             <li className="nav-item logOut">
-              <button className="nav-link btn btn-outline-danger logoutBtn" onClick={this.logUserOut}>Logout</button>
+              <a className="nav-link btn btn-outline-danger logoutBtn" onClick={this.logUserOut} href="/">Logout</a>
             </li>
           </ul>
         </div>
@@ -81,4 +83,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);

@@ -33,6 +33,9 @@ class ChordPredictor extends React.Component {
             this.setState({
               viewChordResults: true,
               nextChordsPredicted: result,
+              viewSongResults: false,
+              viewChordResultErrorMessage: false,
+              viewSongResultErrorMessage: false,
             });
           } else {
             this.setState({
@@ -92,7 +95,7 @@ class ChordPredictor extends React.Component {
     }
     const renderChordPredictor = () => {
       console.error(songsThatUseThoseChords);
-      if (viewChordResults === true) {
+      if (viewChordResults) {
         return (
           <div className="results">
             <hr className="my-3"/>
@@ -118,7 +121,7 @@ class ChordPredictor extends React.Component {
       );
     };
     const renderRelatedSongs = () => {
-      if (viewSongResults === true) {
+      if (viewSongResults) {
         return (
           <div className="results" id="relevantSongs">
             <p className="is-size-5">Songs That Use The Selected Progression</p>
