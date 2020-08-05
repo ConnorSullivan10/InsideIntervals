@@ -33,6 +33,9 @@ class ChordPredictor extends React.Component {
             this.setState({
               viewChordResults: true,
               nextChordsPredicted: result,
+              viewSongResults: false,
+              viewChordResultErrorMessage: false,
+              viewSongResultErrorMessage: false,
             });
           } else {
             this.setState({
@@ -92,7 +95,7 @@ class ChordPredictor extends React.Component {
     }
     const renderChordPredictor = () => {
       console.error(songsThatUseThoseChords);
-      if (viewChordResults === true) {
+      if (viewChordResults) {
         return (
           <div className="results">
             <hr className="my-3"/>
@@ -118,7 +121,7 @@ class ChordPredictor extends React.Component {
       );
     };
     const renderRelatedSongs = () => {
-      if (viewSongResults === true) {
+      if (viewSongResults) {
         return (
           <div className="results" id="relevantSongs">
             <p className="is-size-5">Songs That Use The Selected Progression</p>
@@ -143,7 +146,7 @@ class ChordPredictor extends React.Component {
     };
     return (
       <div className="ChordPredictor box">
-        <p><strong>Select 1 or 2 chords from the options below, to see what chords options (using the Nashville Number System notation) would most likely work next in your progression. If you select 2 chords, you will also see results for popular songs that use that chord progression.</strong></p>
+        <p><strong>The chords below are listed in order by frequency of use in today's top radio hits. Select 1 or 2 chords from the options below, to see what chords options (using the Nashville Number System notation) would most likely work next in your progression, based on their use in existing songs. If you select 2 chords, you will also see results for popular songs that incorporate the selected chord progression.</strong></p>
         <form className="form-group" onChange={this.handleCheckboxLimit} id="chordRadioBox d-flex flex-row flex-wrap">
           {mostCommonChords.map((chord) => <div key={chord.chord_ID} className="wrap checkboxWrap is-one-fourth">
                                             <input className="chord-checkbox" type="checkbox" name={chord.chord_ID} value={chord.child_path} onChange={this.handleCheckboxLimit}/>

@@ -35,6 +35,16 @@ class UserFileUpload extends Component {
       this.setState({ showForm: true });
     }
 
+    exitEntryForm = (e) => {
+      e.preventDefault();
+      this.setState({
+        showForm: false,
+        title: '',
+        journalEntry: '',
+        file: null,
+      });
+    }
+
     titleChange = (e) => {
       e.preventDefault();
       this.setState({ title: e.target.value });
@@ -132,9 +142,12 @@ class UserFileUpload extends Component {
                     </div>
                     <div className="field-body">
                       <div className="field">
-                        <div className="control">
-                          <button className="button is-primary" onClick={this.saveNewUserEntry}>
-                            Submit User Entry
+                        <div className="control userEntryBtns">
+                          <button id="cancelBtn" className="button btn-danger" onClick={this.exitEntryForm}>
+                            Cancel
+                          </button>
+                          <button id="submitBtn" className="button is-primary" onClick={this.saveNewUserEntry}>
+                            Submit
                           </button>
                         </div>
                       </div>

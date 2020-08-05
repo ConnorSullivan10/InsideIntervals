@@ -17,11 +17,6 @@ import auth from '../helpers/data/auth';
 
 fbConnection();
 
-// const PrivateRoute = ({ component: Component, authed, ...rest }) => {
-//   const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
-//   return <Route {...rest} render={(props) => routeChecker(props)} />;
-// };
-
 class App extends React.Component {
   state = {
     authed: false,
@@ -32,6 +27,7 @@ class App extends React.Component {
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        hookTheory.hookTheoryAuth();
         this.setState({
           authed: true,
           userEmail: auth.getEmail(),
@@ -41,7 +37,6 @@ class App extends React.Component {
         this.setState({ authed: false });
       }
     });
-    hookTheory.hookTheoryAuth();
   }
 
   componentWillUnmount() {
