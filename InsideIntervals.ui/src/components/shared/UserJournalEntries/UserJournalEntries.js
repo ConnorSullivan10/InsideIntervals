@@ -16,8 +16,8 @@ class UserJournalEntries extends Component {
                                       </div>
                                       <div className="card-content">
                                         <div className="content">
-                                          <h5 className="card-title">{entry.entryName}</h5>
-                                          <p className="card-text">{entry.entryInput}</p>
+                                          <h5 className="card-title is-size-6 mobile">{entry.entryName}</h5>
+                                          <p className="card-text is-size-6-mobile">{entry.entryInput}</p>
                                         </div>
                                       </div>
                                     </div>)}
